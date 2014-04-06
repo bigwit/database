@@ -16,9 +16,10 @@
 		и замаппим их на урл вида /resources/** -->
 	<resources mapping="/resources/**" location="/resources/" />
 
+	<beans:bean name="/main" class="com.database.web.controllers.MainPageController" />
+
 	<!-- Отображение видов на jsp-файлы, лежащие в папке /WEB-INF/views -->
-	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/pages/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>

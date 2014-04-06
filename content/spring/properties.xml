@@ -12,5 +12,14 @@
       http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<context:property-placeholder location="/spring/properties/page-context.properties" />
+	
+	<bean id="pageContext" class="com.database.web.beans.PageContextBean" lazy-init="true"> 
+		<property name="title" value="${page.title}"></property>
+		<property name="encoding" value="${page.encoding}"></property>
+		<property name="header" value="${page.header}"></property>
+		<property name="footer" value="${page.footer}"></property>
+		<property name="menu" value="${page.menu}"></property>
+		<property name="content" value="${page.content.default}"></property>
+	</bean>
 
 </beans>
