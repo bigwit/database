@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="footer">
-<span style="font-family: monospace; font-size: small;">Разработано и работает на:</span><br>
+<span style="font-family: monospace; font-size: small;">Development by</span><br>
 	<a href="http://hibernate.org/" ><img class="link-image" alt="Hibernate" src="resources/hibernate.png" /></a>
 	<a href="http://spring.io/" ><img class="link-image" alt="Spring" src="resources/spring.png" /></a>
 	<a href="http://oracle.com/" ><img class="link-image" alt="Oracle" src="resources/oracle.jpg" /></a>

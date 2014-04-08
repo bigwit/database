@@ -10,7 +10,7 @@
 		<input width="100%" placeholder="логин"/><br>
 		<input width="100%" placeholder="пароль"/><br>
 		<a href="#" class="head-link">Войти</a>
-		<a href="#" class="head-link"">Регистрация</a>
+		<a href="/database/create" class="head-link">Регистрация</a>
 	<br>
 	</div>
 </div><br>

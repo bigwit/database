@@ -11,15 +11,26 @@
       http://www.springframework.org/schema/context 
       http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<context:property-placeholder location="/spring/properties/page-context.properties" />
+	<context:property-placeholder location="/spring/properties/page-context.properties,
+											/spring/properties/page-content.properties" />
 	
 	<bean id="pageContext" class="com.database.web.beans.PageContextBean" lazy-init="true"> 
-		<property name="title" value="${page.title}"></property>
-		<property name="encoding" value="${page.encoding}"></property>
-		<property name="header" value="${page.header}"></property>
-		<property name="footer" value="${page.footer}"></property>
-		<property name="menu" value="${page.menu}"></property>
-		<property name="content" value="${page.content.default}"></property>
+		<property name="title" value="${page.title}" />
+		<property name="encoding" value="${page.encoding}" />
+		<property name="header" value="${page.header}" />
+		<property name="footer" value="${page.footer}" />
+		<property name="menu" value="${page.menu}" />
+		<property name="content" value="${page.content.default}" />
+	</bean>
+	
+	<bean id="siteContent" class="com.database.web.beans.SiteContent" lazy-init="true">
+		<property name="defaultPage" value="${page.content.default}" />	
+		<property name="searchPage" value="${page.content.search}" />
+		<property name="clientsPage" value="${page.content.clients}" />
+		<property name="officesPage" value="${page.content.offices}" />
+		<property name="descriptorPage" value="${page.content.descriptor}" />
+		<property name="aboutPage" value="${page.content.about}" />
+		<property name="createPage" value="${page.content.create}" />
 	</bean>
 
 </beans>
