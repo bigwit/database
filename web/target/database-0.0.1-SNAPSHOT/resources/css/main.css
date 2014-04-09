@@ -1,0 +1,73 @@
+.header {
+	margin: 0px;
+	padding: 0px;
+}
+
+.footer {
+	
+}
+
+.text-logo {
+	margin-left:20px;
+	font-family: monospace;
+	font-size: xx-large;
+	float: left;
+}
+
+.login-panel {
+	top: 10px;
+	border: solid 1px;
+	border-color: black;
+	border-radius: 5px;
+	width: 200px;
+	float: right;
+	padding-top: 5px;
+	margin-bottom: 2px;
+}
+
+.menu-button {
+	border: solid 1px;
+	border-color: #DD3344;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	margin-right: 2%;
+	margin-top: 0px;
+	height: 25px;
+	background: #DD3344;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-left: 15px;
+	padding-right: 15px;
+	cursor: pointer;
+}
+
+.head-link {
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	color: #DD3344;
+}
+
+.link-image {
+	width: 100px;
+	height: 50px;
+	padding: 5px;
+}
+
+.message {
+	display: none;
+	border: solid 2px;
+	border-color: #DD3344;
+	border-radius: 5px;
+	position: absolute;
+	width: 40%;
+	height: 50px;
+	background: #FFFFFF;
+	color: #DD3344;
+	opacity: 0.9;
+	left: 30%;
+	font-size: x-large;
+	text-align: center;
+	vertical-align: middle;
+}
