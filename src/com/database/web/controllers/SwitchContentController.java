@@ -22,7 +22,7 @@ public class SwitchContentController {
 	@RequestMapping(value="/create")
 	public ModelAndView createPage() {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW,
-				Modeller.FORM_TAG_OBJECT_NAME, new ViewUser());
+				Modeller.VIEW_USER_ATTRIBUTE_NAME, new ViewUser());
 		pageContextBean.setContent(siteContent.getCreatePage());
 		Modeller.addDefaultModels(model, pageContextBean);
 		return model;
@@ -30,11 +30,41 @@ public class SwitchContentController {
 	
 	@RequestMapping(value="/search")
 	public ModelAndView searchPage() {
-		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW,
-				Modeller.FORM_TAG_OBJECT_NAME, new ViewUser());
-		pageContextBean.setContent(siteContent.getCreatePage());
+		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
+		pageContextBean.setContent(siteContent.getSearchPage());
 		Modeller.addDefaultModels(model, pageContextBean);
 		return model;
 	}
 	
+	@RequestMapping(value="/offices")
+	public ModelAndView officesPage() {
+		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
+		pageContextBean.setContent(siteContent.getOfficesPage());
+		Modeller.addDefaultModels(model, pageContextBean);
+		return model;
+	}
+	
+	@RequestMapping(value="/clients")
+	public ModelAndView clientsPage() {
+		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
+		pageContextBean.setContent(siteContent.getClientsPage());
+		Modeller.addDefaultModels(model, pageContextBean);
+		return model;
+	}
+	
+	@RequestMapping(value="/desc")
+	public ModelAndView descPage() {
+		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
+		pageContextBean.setContent(siteContent.getDescriptorPage());
+		Modeller.addDefaultModels(model, pageContextBean);
+		return model;
+	}
+	
+	@RequestMapping(value="/about")
+	public ModelAndView aboutPage() {
+		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
+		pageContextBean.setContent(siteContent.getAboutPage());
+		Modeller.addDefaultModels(model, pageContextBean);
+		return model;
+	}
 }

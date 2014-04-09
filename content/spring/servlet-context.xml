@@ -17,7 +17,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Контроллеры, не использующие прямого отображения URL -> CALL METHOD -->
-	<beans:bean name="/main" class="com.database.web.controllers.MainPageController" />
+	<!--beans:bean name="/main" class="com.database.web.controllers.MainPageController" /-->
 	<!--beans:bean name="/create" class="com.database.web.controllers.CreateUserController" /-->
 
 	<!-- Отображение видов на jsp-файлы, лежащие в папке /content/pages/ -->

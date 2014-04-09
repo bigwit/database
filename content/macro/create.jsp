@@ -5,7 +5,8 @@
 	<br />
 	<span style="font-size: x-large; font-family: monospace; color: #EE3344;">Регистрация</span>
 	<br /><br />
-	<form:form id="createUserForm" method="POST" action="/database/createuser">
+	<!-- Объект ViewUser будет доступен а аттрибутах запроса по ключу viewuser -->
+	<form:form id="createUserForm" method="POST" action="/database/createuser" commandName="viewuser">
 		<table style="width: 400px;">
 			<tr>
 				<td><form:input path="firstName" placeholder="First name" style="width: 185px;" /></td>
@@ -33,11 +34,12 @@
 			<tr>
 				<td><form:input path="date" placeholder="Date birth" style="width: 185px;" /></td>
 				<td>
-					<span style="margin-left: 10px;">F</span><form:radiobutton path="sex" value="F" />
-					<span style="margin-left: 10px;">M</span><form:radiobutton path="sex" value="M" />
+					<b style="margin-left: 10px;" >F</b><form:radiobutton path="sex" value="F" />
+					<b style="margin-left: 10px;" >M</b><form:radiobutton path="sex" value="M" />
 				</td>
 			</tr>
 		</table>
+		<input type="submit" value="Зарегистрировать" />
 	</form:form>
 	<br /><br />
 </div>

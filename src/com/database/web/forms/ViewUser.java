@@ -1,5 +1,8 @@
 package com.database.web.forms;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ViewUser {
 	
 	private String firstName;
