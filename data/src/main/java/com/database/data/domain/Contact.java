@@ -5,26 +5,25 @@ import javax.persistence.*;
 @Entity
 @Table(name = "contacts")
 @NamedQueries({
-	@NamedQuery(name = "Contact.findAll", query = "select c from Contact c"),
-	@NamedQuery(name = "Contact.findById", query = "select c from Contact c where c.id = :id"),
-	@NamedQuery(name = "Contact.findAllWithDetails", query = "select distinct c from Contact c left join fetch ")
-})
+		@NamedQuery(name = "Contact.findAll", query = "select distinct c from Contact c left join fetch c.id_location l where c.id = :id"),
+		@NamedQuery(name = "Contact.findById", query = "select c from Contact c where c.id = :id"),
+		@NamedQuery(name = "Contact.findAllWithDetails", query = "select distinct c from Contact c left join fetch c.id_location l") })
 public class Contact {
 
 	@Id
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "phone")
 	private String phone;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_location")
 	private Location location;
-	
+
 	public Contact() {
 		super();
 	}
