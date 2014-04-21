@@ -16,6 +16,8 @@ public class Modeller {
 	 * Применяется на станицах где используются <form:form>
 	 */
 	public static final String VIEW_USER_ATTRIBUTE_NAME = "viewuser";
+	
+	public static final String VIEW_SEARCH_FORM_QUERY_NAME = "query";
 
 	private static final String MESSAGE_KEY = "message";
 	private static final String HEADER_KEY = "Header";
