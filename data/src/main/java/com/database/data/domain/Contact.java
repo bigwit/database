@@ -59,4 +59,10 @@ public class Contact {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+
+	@Override
+	public String toString() {
+		return "[contact id: " + getId() + " email: " + getEmail() + " phone: "
+				+ getPhone() + " location: " + getLocation() + "]";
+	}
 }
