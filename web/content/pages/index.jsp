@@ -25,7 +25,7 @@
 		<jsp:include page="${Header}"></jsp:include>
 	</div>
 	<div>
-		<hr size="2" color="#EE3344" width="80%" align="center">
+		<hr size="2" color="#f47a20" width="80%" align="center">
 	</div>
 	<div align="center" style="margin-left: 10%; margin-right: 10%;">
 		<jsp:include page="${menu}"></jsp:include>
@@ -35,7 +35,7 @@
 		<jsp:include page="${content}"></jsp:include>
 	</div>
 	<div>
-		<hr size="2" color="#DD3344" width="80%" align="center">
+		<hr size="2" color="#f47a20" width="80%" align="center">
 	</div>
 	<div align="center" style="margin-left: 10%; margin-right: 10%;">
 		<jsp:include page="${footer}"></jsp:include>

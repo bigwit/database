@@ -5,7 +5,7 @@
 <br>
 <form:form id="searchForm" method="POST" action="/database/sch" commandName="query">
 	<form:input path="query" placeholder="${placeholderSearch}" class="query-line" />
-	<input type="submit" value="Поиск" />
+	<input type="submit" value="Поиск" class="button orange" />
 </form:form>
 <br>
 <br>

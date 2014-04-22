@@ -1,6 +1,7 @@
 package com.database.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import com.database.web.beans.SiteContent;
 import com.database.web.controllers.utils.Modeller;
 import com.database.web.forms.ViewSearchForm;
 
+@Controller
 public class SearchController {
 	
 	private static final String NOT_FOUND_MESSAGE = "По вашему запросу '%s' ничего не найдено";
@@ -28,7 +30,7 @@ public class SearchController {
 		//FIXME add work with data base
 		
 		ModelAndView view = new ModelAndView(Modeller.ROOT_VIEW);
-		pageContextBean.setContent(siteContent.getDefaultPage());
+		pageContextBean.setContent(siteContent.getSearchPage());
 		Modeller.addDefaultModels(view, pageContextBean);
 		model.addAllAttributes(view.getModelMap());
 		return "index";
