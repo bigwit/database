@@ -57,4 +57,12 @@ public class Modeller {
 		model.addObject(MESSAGE_KEY, msg);
 	}
 
+	
+	/**
+	 * 
+	 */
+
+	public static final String PLACEHOLDER_SEARCH_LABEL = "Введите запрос";
+	
+	
 }

@@ -12,6 +12,8 @@ import com.database.web.beans.PageContextBean;
 import com.database.web.beans.SiteContent;
 import com.database.web.controllers.utils.Modeller;
 import com.database.web.forms.ViewSearchForm;
+import com.database.web.services.SearchService;
+import com.database.web.services.search.ResultSearch;
 
 @Controller
 public class SearchController {
@@ -22,17 +24,28 @@ public class SearchController {
 	private PageContextBean pageContextBean;
 	
 	@Autowired
+	private SearchService searchService;
+	
+	@Autowired
 	private SiteContent siteContent;
 	
 	@RequestMapping(value = "/sch", method = RequestMethod.POST)
-	public String search(@ModelAttribute("query") ViewSearchForm query, ModelMap model) {
-		
-		//FIXME add work with data base
-		
+	public String search(@ModelAttribute("query") ViewSearchForm query, ModelMap model) {		
 		ModelAndView view = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getSearchPage());
 		Modeller.addDefaultModels(view, pageContextBean);
 		model.addAllAttributes(view.getModelMap());
+		view.addObject("placeholderSearch", Modeller.PLACEHOLDER_SEARCH_LABEL);
+		
+		if(query != null && query.getQuery() != null && !query.getQuery().isEmpty()) {
+			ResultSearch results = searchService.search(query);
+			if(results == null || results.isErrorMessage()) {
+				Modeller.addMessage(view, String.format(NOT_FOUND_MESSAGE, query.getQuery()));
+			} else {
+				view.addObject("valueQuery", query.getQuery());
+				view.addObject("resultset", results.set());
+			}
+		}
 		return "index";
 	}
 	

@@ -28,7 +28,7 @@ public class SwitchContentController {
 				Modeller.VIEW_SEARCH_FORM_QUERY_NAME, new ViewSearchForm());
 		pageContextBean.setContent(siteContent.getDefaultPage());
 		Modeller.addDefaultModels(model, pageContextBean);
-		model.addObject("placeholderSearch", PLACEHOLDER_SEARCH_LABEL);
+		model.addObject("placeholderSearch", Modeller.PLACEHOLDER_SEARCH_LABEL);
 		return model;
 	}
 	
@@ -41,15 +41,13 @@ public class SwitchContentController {
 		return model;
 	}
 	
-	private static final String PLACEHOLDER_SEARCH_LABEL = "Введите запрос";
-	
 	@RequestMapping(value="/search")
 	public ModelAndView searchPage() {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW,
 				Modeller.VIEW_SEARCH_FORM_QUERY_NAME, new ViewSearchForm());
 		pageContextBean.setContent(siteContent.getSearchPage());
 		Modeller.addDefaultModels(model, pageContextBean);
-		model.addObject("placeholderSearch", PLACEHOLDER_SEARCH_LABEL);
+		model.addObject("placeholderSearch", Modeller.PLACEHOLDER_SEARCH_LABEL);
 		return model;
 	}
 	
