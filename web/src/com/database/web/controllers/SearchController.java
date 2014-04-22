@@ -1,5 +1,7 @@
 package com.database.web.controllers;
 
+import java.beans.Encoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,20 +25,19 @@ public class SearchController {
 	@Autowired
 	private PageContextBean pageContextBean;
 	
-	@Autowired
-	private SearchService searchService;
+	private SearchService searchService = new SearchService();
 	
 	@Autowired
 	private SiteContent siteContent;
 	
 	@RequestMapping(value = "/sch", method = RequestMethod.POST)
-	public String search(@ModelAttribute("query") ViewSearchForm query, ModelMap model) {		
+	public ModelAndView search(@ModelAttribute("query") ViewSearchForm query, ModelMap model) {		
 		ModelAndView view = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getSearchPage());
 		Modeller.addDefaultModels(view, pageContextBean);
 		model.addAllAttributes(view.getModelMap());
 		view.addObject("placeholderSearch", Modeller.PLACEHOLDER_SEARCH_LABEL);
-		
+		System.out.println(query.getQuery());
 		if(query != null && query.getQuery() != null && !query.getQuery().isEmpty()) {
 			ResultSearch results = searchService.search(query);
 			if(results == null || results.isErrorMessage()) {
@@ -46,7 +47,7 @@ public class SearchController {
 				view.addObject("resultset", results.set());
 			}
 		}
-		return "index";
+		return view;
 	}
 	
 }

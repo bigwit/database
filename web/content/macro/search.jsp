@@ -8,8 +8,9 @@
 	<form:input path="query" placeholder="${placeholderSearch}" class="query-line" value="${valueQuery}" />
 	<input type="submit" value="Поиск" class="button orange" />
 </form:form>
-<br>Здесь предложение поискать по оригинальному запросу<br><br>
+<br>
 <c:if test="${not empty resultset}">
+	<br>Здесь предложение поискать по оригинальному запросу<br>
 	<c:forEach var="resultItem" items="${resultset}">
 		Категория: ${resultItem.getCategory().getDisplayName()}<br>
 		<table >
@@ -22,8 +23,9 @@
 			</tr>
 		</table>
 	</c:forEach>
+	<br>
+	Показать еще
 </c:if>
-<br>
-Показать еще
+
 <br>
 <br>
