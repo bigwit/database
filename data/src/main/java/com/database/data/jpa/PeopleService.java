@@ -10,5 +10,5 @@ public interface PeopleService {
 	
 	List<People> findAllWithDetails();
 	
-	People findById();
+	People findById(Long id);
 }

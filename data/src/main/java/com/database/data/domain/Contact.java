@@ -5,9 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "contacts")
 @NamedQueries({
-		@NamedQuery(name = "Contact.findAll", query = "select distinct c from Contact c left join fetch c.id_location l where c.id = :id"),
+		@NamedQuery(name = "Contact.findAll", query = "select distinct c from Contact c left join fetch c.location l where c.id = :id"),
 		@NamedQuery(name = "Contact.findById", query = "select c from Contact c where c.id = :id"),
-		@NamedQuery(name = "Contact.findAllWithDetails", query = "select distinct c from Contact c left join fetch c.id_location l") })
+		@NamedQuery(name = "Contact.findAllWithDetails", query = "select distinct c from Contact c left join fetch c.location l") })
 public class Contact {
 
 	@Id

@@ -4,10 +4,17 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.database.data.domain.People;
 import com.database.data.jpa.PeopleService;
 
+@Service("peopleService")
+@Repository
+@Transactional
 public class PeopleServiceImpl implements PeopleService {
 
 	@PersistenceContext
@@ -26,9 +33,9 @@ public class PeopleServiceImpl implements PeopleService {
 	}
 
 	@Override
-	public People findById() {
+	public People findById(Long id) {
 		return entityManager.createNamedQuery("People.findById", People.class)
-				.getSingleResult();
+				.setParameter("id", id).getSingleResult();
 	}
 
 }

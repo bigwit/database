@@ -7,7 +7,9 @@ import javax.persistence.*;
 @Entity
 @Table(name = "peoples")
 @NamedQueries({
-	@NamedQuery(name = "People.findAll", query = "select p from People p")
+	@NamedQuery(name = "People.findAll", query = "select p from People p"),
+	@NamedQuery(name = "People.findById", query = "select p from People p where p.id = :id"),
+	@NamedQuery(name = "People.findAllWithDetails", query = "select distinct p from People p left join fetch p.contact c")
 })
 public class People {
 
