@@ -1,7 +1,5 @@
 package com.database.web.controllers;
 
-import java.beans.Encoder;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -37,7 +35,7 @@ public class SearchController {
 		Modeller.addDefaultModels(view, pageContextBean);
 		model.addAllAttributes(view.getModelMap());
 		view.addObject("placeholderSearch", Modeller.PLACEHOLDER_SEARCH_LABEL);
-		System.out.println(query.getQuery());
+		
 		if(query != null && query.getQuery() != null && !query.getQuery().isEmpty()) {
 			ResultSearch results = searchService.search(query);
 			if(results == null || results.isErrorMessage()) {
