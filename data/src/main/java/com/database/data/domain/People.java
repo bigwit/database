@@ -6,6 +6,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "peoples")
+@NamedQueries({
+	@NamedQuery(name = "People.findAll", query = "select p from People p"),
+	@NamedQuery(name = "People.findById", query = "select p from People p where p.id = :id"),
+	@NamedQuery(name = "People.findAllWithDetails", query = "select distinct p from People p left join fetch p.contact c")
+})
 public class People {
 
 	@Id
@@ -26,6 +31,10 @@ public class People {
 	
 	@Column(name = "sex")
 	private String sex;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_contact")
+	private Contact contact;
 	
 	public People() {
 		super();
@@ -77,6 +86,14 @@ public class People {
 
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+
+	public Contact getContact() {
+		return contact;
+	}
+
+	public void setContact(Contact contact) {
+		this.contact = contact;
 	}
 	
 }
