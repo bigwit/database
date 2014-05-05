@@ -19,12 +19,15 @@ public class OfficesController {
 	@Autowired
 	private SiteContent siteContent;
 	
+	@Autowired
+	private OfficesService officesService;
+	
 	@RequestMapping(value="/offices")
 	public ModelAndView officesPage() {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getOfficesPage());
 		Modeller.addDefaultModels(model, pageContextBean);
-		model.addObject("offices", new OfficesService().getAllOffices());
+		model.addObject("offices", officesService.getAllOffices());
 		return model;
 	}
 	
