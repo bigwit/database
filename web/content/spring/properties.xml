@@ -12,7 +12,8 @@
       http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
 	<context:property-placeholder location="/spring/properties/page-context.properties,
-											/spring/properties/page-content.properties" />
+											/spring/properties/page-content.properties,
+											/spring/properties/jdbc.properties" />
 	
 	<bean id="pageContext" class="com.database.web.beans.PageContextBean" lazy-init="true"> 
 		<property name="title" value="${page.title}" />
