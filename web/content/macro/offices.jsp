@@ -17,9 +17,9 @@
 		<c:forEach var="office" items="${offices}">
 			<tr>
 				<td>${office.getName()}</td>
-				<td>${office.getAdress()}</td>
-				<td>${office.getPhone()}</td>
-				<td>${office.getEmail()}</td>
+				<td>${office.getContact().getLocation().getCountry()} ${office.getContact().getLocation().getCity()}</td>
+				<td>${office.getContact().getPhone()}</td>
+				<td>${office.getContact().getEmail()}</td>
 				<c:if test="${not empty onlineUser}">
 					<td>_link_ Добавить комментарий ${onlineUser}</td>
 				</c:if>

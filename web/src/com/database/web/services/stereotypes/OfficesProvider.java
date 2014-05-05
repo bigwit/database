@@ -1,9 +1,11 @@
 package com.database.web.services.stereotypes;
 
-import com.database.web.services.providers.Office;
+import java.util.List;
+
+import com.database.data.domain.Office;
 
 public interface OfficesProvider {
 	
-	Office[] getAllOffices();
+	List<Office> getAllOffices();
 	
 }

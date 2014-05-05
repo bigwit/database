@@ -1,38 +1,26 @@
 package com.database.web.services;
 
-import com.database.web.services.providers.Office;
+import java.util.List;
+
+import com.database.data.jpa.OfficeService;
+import com.database.data.jpa.impl.OfficeServiceImpl;
+import com.database.data.domain.Office;
 import com.database.web.services.stereotypes.OfficesProvider;
 
 public class OfficesService implements OfficesProvider {
 
+	private OfficeService os;
+	
 	@Override
-	public Office[] getAllOffices() {
-		// TODO Auto-generated method stub
-		return stub();
+	public List<Office> getAllOffices() {
+		return getOfficeService().findAll();
 	}
 	
-	private Office[] stub() {
-		Office[] offices = new Office[3];
-		
-		offices[0] = new Office();
-		offices[0].setName("SPb department");
-		offices[0].setEmail("example@mail.com");
-		offices[0].setPhone("8 981 3213218");
-		offices[0].setAdress("Nevskiy prospect 55/a");
-		
-		offices[1] = new Office();
-		offices[1].setName("NewYork department");
-		offices[1].setEmail("example2@mail.com");
-		offices[1].setPhone("9874568528");
-		offices[1].setAdress("Main street 18");
-
-		offices[2] = new Office();
-		offices[2].setName("Asia tours");
-		offices[2].setEmail("example3@mail.com");
-		offices[2].setPhone("6546544558");
-		offices[2].setAdress("Dundofmvi kra Abudabi 21");
-		
-		return offices;
+	private OfficeService getOfficeService() {
+		if(os == null) {
+			os = new OfficeServiceImpl();
+		}
+		return os;
 	}
 	
 }
