@@ -11,4 +11,6 @@ public interface UserService {
 	User findById(Long id);
 	
 	Long addUser(User user);
+	
+	User getUser(String login, String hashPasswd);
 }

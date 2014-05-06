@@ -61,4 +61,13 @@ public class UserServiceImpl implements UserService {
 		return (Long) query.getOutputParameterValue(5);
 	}
 
+	@Override
+	public User getUser(String login, String hashPasswd) {
+		return (User) entityManager
+				.createNativeQuery(
+						"select * from table(load_users) u where u.login = :login and u.hash_passwd = :hashPasswd", User.class)
+				.setParameter("login", login)
+				.setParameter("hashPasswd", hashPasswd).getSingleResult();
+	}
+
 }
