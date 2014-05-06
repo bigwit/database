@@ -51,14 +51,6 @@ public class SwitchContentController {
 		return model;
 	}
 	
-	@RequestMapping(value="/clients")
-	public ModelAndView clientsPage() {
-		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
-		pageContextBean.setContent(siteContent.getClientsPage());
-		Modeller.addDefaultModels(model, pageContextBean);
-		return model;
-	}
-	
 	@RequestMapping(value="/desc")
 	public ModelAndView descPage() {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);

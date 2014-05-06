@@ -36,6 +36,32 @@
 			window.GrEngine.show("__stud_clb_", "Скромная служба поддержки");
 		});
 		
+		$("#signin").click(function(e) {
+			e.preventDefault();
+			
+			var login = $("#25dfddh6nf").val();
+			var passwd = $("#df5h1hyj35fu").val();
+			
+			var form = document.createElement("form");
+		    form.setAttribute("method", "post");
+		    form.setAttribute("action", "/database/login");
+		    
+		    var hiddenField1 = document.createElement("input");
+		    hiddenField1.setAttribute("type", "hidden");
+		    hiddenField1.setAttribute("name", "login");
+		    hiddenField1.setAttribute("value", login);
+		    var hiddenField = document.createElement("input");
+		    hiddenField.setAttribute("type", "hidden");
+		    hiddenField.setAttribute("name", "passwd");
+		    hiddenField.setAttribute("value", passwd);
+
+		    form.appendChild(hiddenField);
+		    form.appendChild(hiddenField1);
+		    document.body.appendChild(form);
+		    form.submit();
+			
+		});
+		
 	});
 	
 })(jQuery);
