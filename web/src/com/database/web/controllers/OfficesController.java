@@ -1,5 +1,7 @@
 package com.database.web.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +25,17 @@ public class OfficesController {
 	private OfficesService officesService;
 	
 	@RequestMapping(value="/offices")
-	public ModelAndView officesPage() {
+	public ModelAndView officesPage(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getOfficesPage());
 		Modeller.addDefaultModels(model, pageContextBean);
-		model.addObject("offices", officesService.getAllOffices());
+		try {
+			model.addObject("offices", officesService.getAllOffices());
+		} catch(Exception e) {
+			Modeller.setErrorMessage(model);
+		}
 		return model;
 	}
+	
 	
 }
