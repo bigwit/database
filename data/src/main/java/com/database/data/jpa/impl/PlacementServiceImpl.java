@@ -33,9 +33,10 @@ public class PlacementServiceImpl implements PlacementService {
 	@Override
 	@Deprecated
 	public List<Placement> findAllWithDetails() {
-		return entityManager.createNativeQuery(
-				"select * from table(load_placement)", Placement.class)
-				.getResultList();
+		return entityManager
+				.createNativeQuery(
+						"select * from table(load_placement) p join table(load_currency) c on c.id = p.id_currency",
+						Placement.class).getResultList();
 	}
 
 	@Transactional(readOnly = true)
