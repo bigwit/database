@@ -4,10 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "placement")
-@NamedQueries({
-		@NamedQuery(name = "Placement.findAll", query = "select p from Placement p"),
-		@NamedQuery(name = "Placement.findById", query = "select distinct p from Placement p left join fetch p.currency where p.id = :id"),
-		@NamedQuery(name = "Placement.findAllWithDetails", query = "select distinct p from Placement p left join fetch p.currency") })
 public class Placement {
 
 	@Id

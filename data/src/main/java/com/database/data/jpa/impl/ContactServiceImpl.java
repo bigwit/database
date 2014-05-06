@@ -15,6 +15,7 @@ import com.database.data.jpa.ContactService;
 @Service("contactService")
 @Repository
 @Transactional
+@SuppressWarnings("unchecked")
 public class ContactServiceImpl implements ContactService {
 
 	@PersistenceContext
@@ -23,23 +24,27 @@ public class ContactServiceImpl implements ContactService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<Contact> findAll() {
-		return entityManager.createNamedQuery("Contact.findAll", Contact.class)
+		return entityManager.createNativeQuery(
+				"select * from table(load_contacts)", Contact.class)
 				.getResultList();
 	}
 
 	@Transactional(readOnly = true)
 	@Override
+	@Deprecated
 	public List<Contact> findAllWithDetails() {
-		return entityManager.createNamedQuery("Contact.findAllWithDetails",
-				Contact.class).getResultList();
+		return entityManager.createNativeQuery(
+				"select * from table(load_contacts)", Contact.class)
+				.getResultList();
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public Contact findById(Long id) {
-		return entityManager
-				.createNamedQuery("Contact.findById", Contact.class)
-				.setParameter("id", id).getSingleResult();
+		return (Contact) entityManager
+				.createNativeQuery(
+						"select * from table(load_contacts) where id = :id",
+						Contact.class).setParameter("id", id).getSingleResult();
 	}
 
 }

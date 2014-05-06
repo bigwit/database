@@ -15,6 +15,7 @@ import com.database.data.jpa.PlacementService;
 @Repository
 @Service("placementService")
 @Transactional
+@SuppressWarnings("unchecked")
 public class PlacementServiceImpl implements PlacementService {
 
 	@PersistenceContext
@@ -23,23 +24,28 @@ public class PlacementServiceImpl implements PlacementService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<Placement> findAll() {
-		return entityManager.createNamedQuery("Placement.findAll",
-				Placement.class).getResultList();
+		return entityManager.createNativeQuery(
+				"select * from table(load_placement)", Placement.class)
+				.getResultList();
 	}
 
 	@Transactional(readOnly = true)
 	@Override
+	@Deprecated
 	public List<Placement> findAllWithDetails() {
-		return entityManager.createNamedQuery("Placement.findAllWithDetails",
-				Placement.class).getResultList();
+		return entityManager.createNativeQuery(
+				"select * from table(load_placement)", Placement.class)
+				.getResultList();
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public Placement findById(Long id) {
-		return entityManager
-				.createNamedQuery("Placement.findById", Placement.class)
-				.setParameter("id", id).getSingleResult();
+		return (Placement) entityManager
+				.createNativeQuery(
+						"select * from table(load_placement) where id = :id",
+						Placement.class).setParameter("id", id)
+				.getSingleResult();
 	}
 
 }

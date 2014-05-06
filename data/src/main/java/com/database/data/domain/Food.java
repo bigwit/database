@@ -4,9 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "food")
-@NamedQueries({
-		@NamedQuery(name = "Food.findAll", query = "select f from Food f"),
-		@NamedQuery(name = "Food.findById", query = "select distinct f from Food f where f.id = :id") })
 public class Food {
 
 	@Id

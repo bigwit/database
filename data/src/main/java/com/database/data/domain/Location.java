@@ -3,15 +3,10 @@ package com.database.data.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "locations")
-@NamedQueries({
-		@NamedQuery(name = "Location.findAll", query = "select loc from Location loc"),
-		@NamedQuery(name = "Location.findById", query = "select loc from Location loc where loc.id = :id") })
 public class Location {
 
 	@Id

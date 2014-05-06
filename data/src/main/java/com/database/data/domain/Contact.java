@@ -4,10 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "contacts")
-@NamedQueries({
-		@NamedQuery(name = "Contact.findAll", query = "select distinct c from Contact c left join fetch c.location l where c.id = :id"),
-		@NamedQuery(name = "Contact.findById", query = "select c from Contact c where c.id = :id"),
-		@NamedQuery(name = "Contact.findAllWithDetails", query = "select distinct c from Contact c left join fetch c.location l") })
 public class Contact {
 
 	@Id
@@ -62,7 +58,7 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		return "[contact id: " + getId() + " email: " + getEmail() + " phone: "
-				+ getPhone() + " location: " + getLocation() + "]";
+		return "[contact id: " + id + " email: " + email + " phone: " + phone
+				+ " location: " + ((location == null) ? null : location) + "]";
 	}
 }

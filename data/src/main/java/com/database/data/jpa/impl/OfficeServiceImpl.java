@@ -15,6 +15,7 @@ import com.database.data.jpa.OfficeService;
 @Service("officeService")
 @Repository
 @Transactional
+@SuppressWarnings("unchecked")
 public class OfficeServiceImpl implements OfficeService {
 
 	@PersistenceContext
@@ -23,21 +24,22 @@ public class OfficeServiceImpl implements OfficeService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<Office> findAll() {
-		return entityManager.createNamedQuery("Office.findAll", Office.class)
+		return entityManager.createNativeQuery("select * from table(load_offices)", Office.class)
 				.getResultList();
 	}
 
 	@Transactional(readOnly = true)
 	@Override
+	@Deprecated
 	public List<Office> findAllWithDetails() {
-		return entityManager.createNamedQuery("Office.findAllWithDetails",
+		return entityManager.createNativeQuery("select * from table(load_offices)",
 				Office.class).getResultList();
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public Office findById(Long id) {
-		return entityManager.createNamedQuery("Office.findById", Office.class)
+		return (Office) entityManager.createNativeQuery("select * from table(load_offices) where id = :id", Office.class)
 				.setParameter("id", id).getSingleResult();
 	}
 

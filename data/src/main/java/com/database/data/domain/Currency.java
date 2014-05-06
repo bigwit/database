@@ -4,10 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "currency")
-@NamedQueries({
-	@NamedQuery(name = "Currency.findAll", query = "select c from Currency c"),
-	@NamedQuery(name = "Currency.findById", query = "select c from Currency c where c.id = :id")
-})
 public class Currency {
 
 	@Id
@@ -16,6 +12,9 @@ public class Currency {
 	
 	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "rate")
+	private Float rate;
 
 	public Currency() {
 	}
@@ -34,6 +33,14 @@ public class Currency {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Float getRate() {
+		return rate;
+	}
+
+	public void setRate(Float rate) {
+		this.rate = rate;
 	}
 	
 	@Override

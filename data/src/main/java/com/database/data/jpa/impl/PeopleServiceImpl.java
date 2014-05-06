@@ -15,6 +15,7 @@ import com.database.data.jpa.PeopleService;
 @Service("peopleService")
 @Repository
 @Transactional
+@SuppressWarnings("unchecked")
 public class PeopleServiceImpl implements PeopleService {
 
 	@PersistenceContext
@@ -22,20 +23,25 @@ public class PeopleServiceImpl implements PeopleService {
 
 	@Override
 	public List<People> findAll() {
-		return entityManager.createNamedQuery("People.findAll", People.class)
+		return entityManager.createNativeQuery(
+				"select * from table(load_peoples)", People.class)
 				.getResultList();
 	}
 
 	@Override
+	@Deprecated
 	public List<People> findAllWithDetails() {
-		return entityManager.createNamedQuery("People.findAllWithDetails",
-				People.class).getResultList();
+		return entityManager.createNativeQuery(
+				"select * from table(load_peoples)", People.class)
+				.getResultList();
 	}
 
 	@Override
 	public People findById(Long id) {
-		return entityManager.createNamedQuery("People.findById", People.class)
-				.setParameter("id", id).getSingleResult();
+		return (People) entityManager
+				.createNativeQuery(
+						"select * from table(load_peoples) where id = :id",
+						People.class).setParameter("id", id).getSingleResult();
 	}
 
 }

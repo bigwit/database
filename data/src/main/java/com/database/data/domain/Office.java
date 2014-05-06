@@ -1,21 +1,9 @@
 package com.database.data.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "offices")
-@NamedQueries({
-	@NamedQuery(name = "Office.findAll", query = "select o from Office o"),
-	@NamedQuery(name = "Office.findById", query = "select distinct o from Office o left join fetch o.contact c left join fetch c.location l where o.id = :id"),
-	@NamedQuery(name = "Office.findAllWithDetails", query = "select distinct o from Office o left join fetch o.contact c left join fetch c.location l")
-})
 public class Office {
 	
 	@Id

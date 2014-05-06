@@ -20,16 +20,19 @@ public class FoodServiceImpl implements FoodService {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Food> findAll() {
-		return entityManager.createNamedQuery("Food.findAll", Food.class)
-				.getResultList();
+		return entityManager.createNativeQuery(
+				"select * from table(load_food)", Food.class).getResultList();
 	}
 
 	@Override
 	public Food findById(Long id) {
-		return entityManager.createNamedQuery("Food.findById", Food.class)
-				.setParameter("id", id).getSingleResult();
+		return (Food) entityManager
+				.createNativeQuery(
+						"select * from table(load_food) where id = :id",
+						Food.class).setParameter("id", id).getSingleResult();
 	}
 
 }

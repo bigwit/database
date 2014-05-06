@@ -20,19 +20,23 @@ public class CurrencyServiceImpl implements CurrencyService {
 	@PersistenceContext
 	private EntityManager entityManager;
 
+	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	@Override
 	public List<Currency> findAll() {
-		return entityManager.createNamedQuery("Currency.findAll",
-				Currency.class).getResultList();
+		return entityManager.createNativeQuery(
+				"select * from table (load_currency_pipe)", Currency.class)
+				.getResultList();
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public Currency findById(Long id) {
-		return entityManager
-				.createNamedQuery("Currency.findById", Currency.class)
-				.setParameter("id", id).getSingleResult();
+		return (Currency) entityManager
+				.createNativeQuery(
+						"select * from table(load_currency) where id = :id",
+						Currency.class).setParameter("id", id)
+				.getSingleResult();
 	}
 
 }

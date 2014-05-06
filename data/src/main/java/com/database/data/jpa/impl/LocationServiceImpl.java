@@ -15,6 +15,7 @@ import com.database.data.jpa.LocationService;
 @Service("locationService")
 @Repository
 @Transactional
+@SuppressWarnings("unchecked")
 public class LocationServiceImpl implements LocationService {
 
 	@PersistenceContext
@@ -23,16 +24,19 @@ public class LocationServiceImpl implements LocationService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<Location> findAll() {
-		return entityManager.createNamedQuery("Location.findAll",
-				Location.class).getResultList();
+		return entityManager.createNativeQuery(
+				"select * from table(load_locations)", Location.class)
+				.getResultList();
 	}
 
 	@Transactional(readOnly = true)
 	@Override
 	public Location findById(Long id) {
-		return entityManager
-				.createNamedQuery("Location.findById", Location.class)
-				.setParameter("id", id).getSingleResult();
+		return (Location) entityManager
+				.createNativeQuery(
+						"select * from table(load_locations) where id = :id",
+						Location.class).setParameter("id", id)
+				.getSingleResult();
 	}
 
 }
