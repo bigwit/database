@@ -94,7 +94,8 @@
 .button {
 	display: inline-block;
 	outline: none;
-	height: 35px; cursor : pointer;
+	height: 35px;
+	cursor: pointer;
 	text-align: center;
 	text-decoration: none;
 	font: 14px/100% Arial, Helvetica, sans-serif;
@@ -122,9 +123,11 @@
 	color: #fef4e9;
 	border: solid 1px #da7c0c;
 	background: #f78d1d;
-	background: -webkit-gradient(linear, left top, left bottom, from(#faa51a), to(#f47a20));
+	background: -webkit-gradient(linear, left top, left bottom, from(#faa51a),
+		to(#f47a20));
 	background: -moz-linear-gradient(top, #faa51a, #f47a20);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a', endColorstr='#f47a20');
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#faa51a',
+		endColorstr='#f47a20');
 }
 
 .orange:hover {
@@ -154,8 +157,7 @@
 	padding: 0px;
 	width: 90%;
 	box-shadow: 5px 5px 3px rgba(200, 200, 100, 0.9);
-	
-	border: 1px solid #000000 !important;	
+	border: 1px solid #000000 !important;
 	-moz-border-radius-bottomleft: 0px;
 	-webkit-border-bottom-left-radius: 0px;
 	border-bottom-left-radius: 0px;
@@ -168,10 +170,10 @@
 	-moz-border-radius-topleft: 0px;
 	-webkit-border-top-left-radius: 0px;
 	border-top-left-radius: 0px;
-	border-radius: 5px; 
-	-webkit-border-radius : 5px; 
-	-moz-border-radius : 5px; 
-	-khtml-border-radius : 5px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
 }
 
 .offices-table table {
@@ -245,9 +247,11 @@
 
 .offices-table th {
 	background: -o-linear-gradient(bottom, #faa51a 5%, #f47a20 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #faa51a), color-stop(1, #f47a20));
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #faa51a
+		), color-stop(1, #f47a20));
 	background: -moz-linear-gradient(center top, #faa51a 5%, #f47a20 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#faa51a", endColorstr="#f47a20");
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#faa51a",
+		endColorstr="#f47a20");
 	background: -o-linear-gradient(top, #faa51a, f47a20);
 	background-color: #faa51a;
 	border: 0px solid #000000;
@@ -277,6 +281,73 @@
 .offices-table tr:first-child td:last-child {
 	border-width: 1px 1px 1px 1px;
 }
+
+.blocker {
+	display: none;
+	background-color: #A0B0C0;
+	position: fixed;
+	opacity: 0.6;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 10;
+}
+
+.head-line {
+	background-color: #fab51f !important;
+	color: white;
+	position: fixed;
+	left: 20%;
+	top: 20%;
+	right: 20%;
+	height: 40px;
+	z-index: 12;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	color: white;
+}
+
+.base-frame {
+	background-color: #FFEFEF;
+	position: fixed;
+	left: 20%;
+	top: 20%;
+	right: 20%;
+	bottom: 20%;
+	z-index: 11;
+	border: 1px solid #faa51a;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	box-shadow: 5px 5px 3px rgba(200, 200, 100, 0.9);
+	overflow-y: auto;
+}
+
+.close {
+	position: relative;
+	float: right;
+	margin-top: 15%;
+	margin-bottom: 15px;
+	right: 15px;
+}
+
+.title-win {
+	margin: 5px;
+	position: relative;
+	top: 10px;
+	vertical-align: middle;
+	font-size: larger;
+}
+
+
+
+
+
+
+
+
 
 
 

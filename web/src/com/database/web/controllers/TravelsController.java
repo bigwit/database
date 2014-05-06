@@ -1,19 +1,17 @@
 package com.database.web.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.database.data.jpa.TravelService;
 import com.database.web.beans.PageContextBean;
 import com.database.web.beans.SiteContent;
 import com.database.web.controllers.utils.Modeller;
-import com.database.web.services.OfficesService;
 
 @Controller
-public class OfficesController {
+public class TravelsController {
 
 	@Autowired
 	private PageContextBean pageContextBean;
@@ -22,20 +20,14 @@ public class OfficesController {
 	private SiteContent siteContent;
 	
 	@Autowired
-	private OfficesService officesService;
+	private TravelService travelService;
 	
-	@RequestMapping(value="/offices")
-	public ModelAndView officesPage(HttpServletRequest request) {
+	@RequestMapping(value="/clients")
+	public ModelAndView clientsPage() {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
-		pageContextBean.setContent(siteContent.getOfficesPage());
+		pageContextBean.setContent(siteContent.getClientsPage());
 		Modeller.addDefaultModels(model, pageContextBean);
-		try {
-			model.addObject("offices", officesService.getAllOffices());
-		} catch(Exception e) {
-			Modeller.setErrorMessage(model);
-		}
 		return model;
 	}
-	
 	
 }

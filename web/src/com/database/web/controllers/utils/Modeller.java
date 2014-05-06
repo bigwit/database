@@ -22,6 +22,8 @@ public class Modeller {
 	private static final String MESSAGE_KEY = "message";
 	private static final String HEADER_KEY = "Header";
 	private static final String FOOTER_KEY = "footer";
+	
+	public static final String UNKNOWN_ERROR_MESSAGE = "База данных временно не доступна";
 
 	/**
 	 * Метод вытаскивает баозвый контекст любой страницы из бина (хранилища
@@ -63,6 +65,10 @@ public class Modeller {
 	 */
 
 	public static final String PLACEHOLDER_SEARCH_LABEL = "Введите запрос";
+
+	public static void setErrorMessage(ModelAndView model) {
+		addMessage(model, UNKNOWN_ERROR_MESSAGE);
+	}
 	
 	
 }

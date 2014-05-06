@@ -25,6 +25,8 @@
 		<beans:property name="prefix" value="/pages/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
+	
+	<beans:bean id="secureCookie" class="com.database.web.autorization.secure.CookieFilter" lazy-init="true" />
 
 	<!-- Файл с настройками контроллеров -->
 	<beans:import resource="controllers.xml" />
