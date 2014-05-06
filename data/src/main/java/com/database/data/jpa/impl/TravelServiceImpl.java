@@ -42,7 +42,9 @@ public class TravelServiceImpl implements TravelService {
 		Long peopleId = user.getPeople().getId();
 		return entityManager
 				.createNativeQuery(
-						"select * from table(load_travels) where id_people = :peopleId")
+						"select tr.id, tr.number_adults, tr.number_child, tr.date_payment, tr.id_tour, tr.id_client "
+								+ "from table(load_travels) tr join clients cl on "
+								+ "tr.id_client = cl.id and cl.id_people = :peopleId")
 				.setParameter("peopleId", peopleId).getResultList();
 	}
 
