@@ -9,20 +9,20 @@ public class User {
 	@Id
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "login")
 	private String login;
-	
+
 	@Column(name = "hash_passwd")
 	private String hashPasswd;
-	
+
 	@Column(name = "role")
 	private String role;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_people")
 	private People people;
-	
+
 	public User() {
 	}
 
@@ -64,5 +64,11 @@ public class User {
 
 	public void setPeople(People people) {
 		this.people = people;
+	}
+
+	@Override
+	public String toString() {
+		return "[user id: " + id + ", login: " + login + ", hash_passwd: "
+				+ hashPasswd + ", role: " + role + ", people: " + people + "]";
 	}
 }

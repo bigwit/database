@@ -128,4 +128,11 @@ public class Travel {
 	public String getTargetPlaceName() {
 		return getTour().getPlace().getName();
 	}
+
+	@Override
+	public String toString() {
+		return "[travel id: " + id + ", date_payment: " + datePayment
+				+ ", number_adults: " + numberAdults + ", number_child: "
+				+ numberChild + ", client: " + client + ", tour: " + tour + "]";
+	}
 }
