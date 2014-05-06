@@ -11,24 +11,24 @@ public class Travel {
 	@Id
 	@Column(name = "id")
 	private Long id;
-	
+
 	@Column(name = "date_payment")
 	private Date datePayment;
-	
+
 	@Column(name = "number_adults")
 	private Long numberAdults;
-	
+
 	@Column(name = "number_child")
 	private Long numberChild;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_client")
 	private Client client;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_tour")
 	private Tour tour;
-	
+
 	public Travel() {
 	}
 
@@ -78,5 +78,61 @@ public class Travel {
 
 	public void setTour(Tour tour) {
 		this.tour = tour;
+	}
+
+	/**
+	 * @return оплачена ли поездка
+	 */
+	public boolean isPayment() {
+		return (getDatePayment() != null);
+	}
+
+	/**
+	 * @return название офиса, где была куплена поездка
+	 */
+	public String getOfficeName() {
+		return getTour().getOffice().getName();
+	}
+
+	/**
+	 * @return имя сотрудника, продавшего путевку
+	 */
+	public String getFirstNameEmployee() {
+		return getClient().getEmployee().getPeople().getFirstName();
+	}
+
+	/**
+	 * @return отчество сотрудника, продавшего путевку
+	 */
+	public String getMiddleNameEmployee() {
+		return getClient().getEmployee().getPeople().getMiddleName();
+	}
+
+	/**
+	 * @return фамилия сотрудника, продавшего путевку
+	 */
+	public String getLastNameEmployee() {
+		return getClient().getEmployee().getPeople().getLastName();
+	}
+
+	/**
+	 * @return название тура
+	 */
+	public String getTourName() {
+		return getTour().getName();
+	}
+
+	/**
+	 * @return имя целевого места
+	 */
+	public String getTargetPlaceName() {
+		return getTour().getPlace().getName();
+	}
+
+	@Override
+	public String toString() {
+		return "[travel id: " + id + ", date_payment: " + datePayment
+				+ ", number_adults: " + numberAdults + ", number_child: "
+				+ numberChild + ", client: " + client + ", tour: " + tour + "]";
 	}
 }

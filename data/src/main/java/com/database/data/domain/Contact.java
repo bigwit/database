@@ -59,6 +59,6 @@ public class Contact {
 	@Override
 	public String toString() {
 		return "[contact id: " + id + " email: " + email + " phone: " + phone
-				+ " location: " + ((location == null) ? null : location) + "]";
+				+ " location: " + location + "]";
 	}
 }
