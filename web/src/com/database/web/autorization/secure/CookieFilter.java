@@ -12,19 +12,21 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.database.web.autorization.GridData;
 
-public class CookieFilter extends OncePerRequestFilter{
+public class CookieFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest req,
-			HttpServletResponse res, FilterChain fc)
-			throws ServletException, IOException {
-		for(Cookie c : req.getCookies()) {
-			if(c.getName().equals(SecureCookie.COOKIE_NAME)) {
-				req.setAttribute("USER", GridData.getInstance().getUser(c.getValue()));
-				break;
+			HttpServletResponse res, FilterChain fc) throws ServletException,
+			IOException {
+		if (req.getCookies() != null) {
+			for (Cookie c : req.getCookies()) {
+				if (c.getName().equals(SecureCookie.COOKIE_NAME)) {
+					req.setAttribute("USER",
+							GridData.getInstance().getUser(c.getValue()));
+					break;
+				}
 			}
 		}
 		fc.doFilter(req, res);
 	}
-
 }

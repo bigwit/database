@@ -10,7 +10,7 @@
 	<c:if test="${empty onlineUser}">
 		<div class="login-panel">
 			<input id="25dfddh6nf" name="login" width="100%" placeholder="логин"/><br>
-			<input id="df5h1hyj35fu" name="passwd" width="100%" placeholder="пароль"/><br>
+			<input id="df5h1hyj35fu" name="passwd" width="100%" placeholder="пароль" type="password" /><br>
 			<a id="signin" href="#" class="head-link color-orange">Войти</a>
 			<a href="/database/create" class="head-link color-orange">Регистрация</a>
 			<br>

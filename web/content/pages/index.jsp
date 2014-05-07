@@ -20,8 +20,8 @@
 <script type="text/javascript" src="resources/js/main.js"></script>
 <title>${title}</title>
 </head>
-<div id="message" class="message">${message}</div>
 <body style="min-width: 900px;">
+<div id="message" class="message">${message}</div>
 	<div align="center" style="margin-left: 10%; margin-right: 10%;">
 		<jsp:include page="${Header}"></jsp:include>
 	</div>

@@ -1,6 +1,7 @@
 package com.database.web.autorization;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
@@ -50,7 +51,6 @@ public class GridData {
 	private void update(String cookie) {
 		for(Date d : accessTimes.keySet()) {
 			if(accessTimes.get(d).equals(cookie)) {
-				accessTimes.remove(d, accessTimes.get(d));
 				accessTimes.put(new Date(), cookie);
 				return;
 			}
@@ -74,10 +74,10 @@ public class GridData {
 			byte[] bytesOfMessage = source.getBytes("UTF-8");
 			MessageDigest md = MessageDigest.getInstance("MD5");
 			thedigest = md.digest(bytesOfMessage);
+			return URLEncoder.encode(new String(thedigest), "UTF-8");
 		} catch (Exception e) {
 			return source;
 		}
-		return new String(thedigest);
 	}
 
 	private class Cleaner implements Runnable {

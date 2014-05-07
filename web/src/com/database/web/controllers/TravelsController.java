@@ -28,7 +28,7 @@ public class TravelsController {
 	public ModelAndView clientsPage(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getClientsPage());
-		Modeller.addDefaultModels(model, pageContextBean);
+		Modeller.addDefaultModels(model, pageContextBean, request);
 		model.addObject("onlineUser", request.getAttribute("USER"));
 		try {
 			model.addObject("travels", travelService.findAll());

@@ -28,12 +28,14 @@ public class OfficesController {
 	public ModelAndView officesPage(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getOfficesPage());
-		Modeller.addDefaultModels(model, pageContextBean);
+		Modeller.addDefaultModels(model, pageContextBean, request);
 		try {
 			model.addObject("offices", officesService.getAllOffices());
 		} catch(Exception e) {
 			Modeller.setErrorMessage(model);
 		}
+		model.addObject("onlineUser", request.getAttribute("USER"));
+		
 		return model;
 	}
 	

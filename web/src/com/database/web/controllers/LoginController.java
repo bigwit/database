@@ -37,6 +37,7 @@ public class LoginController {
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getDefaultPage());
+		Modeller.addDefaultModels(model, pageContextBean, request);
 
 		String passwd = GridData.getMD5(request.getParameter("passwd"));
 		String login = request.getParameter("login");
@@ -47,15 +48,14 @@ public class LoginController {
 		User user = userService.getUser(login, passwd);
 		if (user != null) {
 			String secureCookie = GridData.getInstance().addUser(user);
-
+			
 			// сохранить в модели и выставить куку
 			model.addObject("onlineUser", user);
 			SecureCookie.setCookie(response, secureCookie);
 		} else {
 			Modeller.addMessage(model, "Пользователя с такой комбинацией логина и пароля не существует");
 		}
-
-		Modeller.addDefaultModels(model, pageContextBean);
+		
 		return model;
 	}
 

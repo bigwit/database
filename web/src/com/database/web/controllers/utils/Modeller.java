@@ -1,8 +1,11 @@
 package com.database.web.controllers.utils;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.database.web.beans.PageContextBean;
+import com.database.web.forms.ViewSearchForm;
 
 public class Modeller {
 
@@ -36,7 +39,7 @@ public class Modeller {
 	 *            source of model parameters
 	 */
 	public static void addDefaultModels(ModelAndView model,
-			PageContextBean pageContext) {
+			PageContextBean pageContext, HttpServletRequest request) {
 		model.addObject(HEADER_KEY, pageContext.getHeader());
 		model.addObject(FOOTER_KEY, pageContext.getFooter());
 		model.addObject("menu", pageContext.getMenu());
@@ -44,6 +47,10 @@ public class Modeller {
 		model.addObject("title", pageContext.getTitle());
 		model.addObject("encoding", pageContext.getEncoding());
 		model.addObject(MESSAGE_KEY, "");
+		model.addObject("query", new ViewSearchForm());
+		model.addObject("placeholderSearch", PLACEHOLDER_SEARCH_LABEL);
+		model.addObject("onlineUser", request.getAttribute("USER"));
+		
 	}
 
 	/**

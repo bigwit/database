@@ -11,7 +11,7 @@
 			<th>Телефон</th>
 			<th>E-mail</th>
 			<c:if test="${not empty onlineUser}">
-					<th>Добавить комментарий ${onlineUser}</th>
+					<th><span data-add-comment>Добавить комментарий ${onlineUser.getLogin()}</span></th>
 			</c:if>
 		
 		<c:forEach var="office" items="${offices}">
@@ -21,10 +21,13 @@
 				<td>${office.getContact().getPhone()}</td>
 				<td>${office.getContact().getEmail()}</td>
 				<c:if test="${not empty onlineUser}">
-					<td>_link_ Добавить комментарий ${onlineUser}</td>
+					<td>_link_ Добавить комментарий</td>
 				</c:if>
 			</tr>
 		</c:forEach>
 	</table>
 </c:if>
 <br>
+<div id="add_comm_office" style="display: none;">
+	add comment form here
+</div>
