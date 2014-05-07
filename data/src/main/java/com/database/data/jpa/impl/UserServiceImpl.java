@@ -77,7 +77,6 @@ public class UserServiceImpl implements UserService {
 							User.class).setParameter("login", login)
 					.setParameter("hashPasswd", hashPasswd).getSingleResult();
 		} catch (NoResultException e) {
-			e.printStackTrace();
 			return null;
 		}
 	}

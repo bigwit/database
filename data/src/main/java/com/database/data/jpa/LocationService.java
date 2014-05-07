@@ -9,4 +9,6 @@ public interface LocationService {
 	List<Location> findAll();
 	
 	Location findById(Long id);
+	
+	Long addLocation(String country, String city, String description);
 }
