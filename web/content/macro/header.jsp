@@ -5,7 +5,8 @@
 <div class="header">
 	<div class="text-logo">
 		Курсовая работа <br>
-		"Приложение к базе данных <br>турагенства"
+		"Приложение к базе <br>
+		данных турагенства"
 	</div>
 	<c:if test="${empty onlineUser}">
 		<div class="login-panel">
@@ -18,7 +19,8 @@
 	</c:if>
 	<c:if test="${not empty onlineUser}">
 		<div>
-			Welcome, ${onlineUser.getLogin()}
+			Welcome, ${onlineUser.getLogin()} 
+			<div id="person" class="">Персональные данные</div>
 			<!-- добавить линк по которомы выкидивать окно с инфой о юзере -->
 		</div>
 	</c:if>

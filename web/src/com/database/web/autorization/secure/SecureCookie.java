@@ -9,7 +9,7 @@ public class SecureCookie {
 	
 	public static void setCookie(HttpServletResponse res, String value) {
 		Cookie cookie = new Cookie(COOKIE_NAME, value);
-		cookie.setMaxAge(60); // 1 min
+		cookie.setMaxAge(60 * 30); // 30 min
 		cookie.setSecure(false);
 		res.addCookie(cookie);
 	}

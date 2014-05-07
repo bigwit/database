@@ -10,10 +10,14 @@ import com.database.web.forms.ViewSearchForm;
 public class Modeller {
 
 	/**
-	 * Базовая JSP используемая в качестве шаблона для постоения страницы.
+	 * Базовые JSP используемые в качестве шаблона для постоения страниц.
 	 */
 	public static final String ROOT_VIEW = "index";
 
+	public static final String ROOT_VIEW_EMPLOYEE = "besttour";
+
+	public static final String ROOT_VIEW_ADMIN = "dnm";
+	
 	/**
 	 * Объект, используемый для получения ModelAndView в качестве имени модели.
 	 * Применяется на станицах где используются <form:form>

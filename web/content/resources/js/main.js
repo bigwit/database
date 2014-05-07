@@ -50,9 +50,8 @@
 								});
 						
 						$("[data-add-comment]").each(function(i, elem) {
-							$(elem).click(function() {
-								window.GrEngine("add_comm_office",
-										"Добавить комментарий");
+							$(elem).click(function(e) {
+								window.GrEngine.show("add_comm_office", "Добавить комментарий");
 							});
 						});
 
