@@ -53,4 +53,11 @@ public class OfficeServiceImpl implements OfficeService {
 		}
 	}
 
+	@Override
+	public Long addOffice(Office office) {
+		throw new IllegalStateException();
+//		return new ProcedureExecutor(entityManager, "add_office_test")
+//				.in().out(Long.class).execute().getOut(2, Long.class);
+	}
+
 }

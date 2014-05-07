@@ -1,48 +1,77 @@
 package com.database.data.jpa.procedure;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
-
-import org.hibernate.hql.internal.ast.SqlASTFactory;
 
 public class ProcedureExecutor {
 
 	private StoredProcedureQuery procedureQuery;
 
-	private int position = 1;
+	private Set<Integer> outPositions;
 
-	public ProcedureExecutor(EntityManager entityManager, String procedureName) {
+	private int nextPosition = 1;
+
+	private int returnPosition;
+
+	public ProcedureExecutor(EntityManager entityManager, String procedureName,
+			Class<?>... paramTypes) {
 		procedureQuery = entityManager
 				.createStoredProcedureQuery(procedureName);
+		outPositions = new HashSet<>();
 	}
 
-	public ProcedureExecutor in(Object value) {
-		procedureQuery.registerStoredProcedureParameter(position,
-				value.getClass(), ParameterMode.IN).setParameter(position,
-				value);
-		position++;
+	public ProcedureExecutor in(Class<?>... valueClasses) {
+		for (Class<?> valueClass : valueClasses) {
+			procedureQuery.registerStoredProcedureParameter(nextPosition,
+					valueClass, ParameterMode.IN);
+			nextPosition++;
+		}
 		return this;
 	}
 
-	public ProcedureExecutor out(Class<?> valueClass) {
-		procedureQuery.registerStoredProcedureParameter(position,
-				valueClass, ParameterMode.OUT);
-		position++;
+	public ProcedureExecutor out(Class<?>... valueClasses) {
+		for (Class<?> valueClass : valueClasses) {
+			procedureQuery.registerStoredProcedureParameter(nextPosition,
+					valueClass, ParameterMode.OUT);
+			outPositions.add(nextPosition);
+			nextPosition++;
+		}
 		return this;
 	}
-	
-	public ProcedureExecutor execute() {
-		procedureQuery.execute();
+
+	public ProcedureExecutor returnThis() {
+		returnPosition = nextPosition - 1;
 		return this;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public <TResult> TResult getOut(int position, Class<TResult> required) {
-		return (TResult) procedureQuery.getOutputParameterValue(position);
+	public <TResultType> TResultType call(Object... params) {
+		setParameters(params);
+		System.out.println("set parameters");
+		procedureQuery.execute();
+		System.out.println("execute");
+		return (TResultType) procedureQuery
+				.getOutputParameterValue(returnPosition);
 	}
 
 	public StoredProcedureQuery build() {
 		return procedureQuery;
+	}
+
+	private void setParameters(Object... params) {
+		int pos = 1, i = 0;
+		final int countParams = procedureQuery.getParameters().size();
+		while (pos <= countParams) {
+			if (!outPositions.contains(pos)) {
+				System.out.println("set parameter: " + pos + " " + params[i]);
+				procedureQuery.setParameter(pos, params[i]);
+				i++;
+			}
+			pos++;
+		}
 	}
 }

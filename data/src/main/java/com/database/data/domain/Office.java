@@ -5,18 +5,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "offices")
 public class Office {
-	
+
 	@Id
 	@Column(name = "id")
 	private Long id;
 
 	@Column(name = "name")
 	private String name;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "id_contact")
 	private Contact contact;
-	
+
 	public Office() {
 	}
 
@@ -42,5 +42,11 @@ public class Office {
 
 	public void setContact(Contact contact) {
 		this.contact = contact;
+	}
+
+	@Override
+	public String toString() {
+		return "[office id: " + id + ", name: " + name + ", contact: "
+				+ contact + "]";
 	}
 }

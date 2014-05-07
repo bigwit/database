@@ -12,4 +12,5 @@ public interface OfficeService {
 	
 	Office findById(Long id);
 	
+	Long addOffice(Office office);
 }
