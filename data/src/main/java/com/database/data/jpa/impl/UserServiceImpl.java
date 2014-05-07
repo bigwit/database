@@ -4,9 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
-import javax.persistence.StoredProcedureQuery;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -51,24 +49,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Long addUser(User user) {
-		StoredProcedureQuery query = entityManager
-				.createStoredProcedureQuery("add_user")
-				.registerStoredProcedureParameter(1, String.class,
-						ParameterMode.IN)
-				.setParameter(1, user.getLogin())
-				.registerStoredProcedureParameter(2, String.class,
-						ParameterMode.IN)
-				.setParameter(2, user.getHashPasswd())
-				.registerStoredProcedureParameter(3, String.class,
-						ParameterMode.IN)
-				.setParameter(3, user.getRole())
-				.registerStoredProcedureParameter(4, Long.class,
-						ParameterMode.IN)
-				.setParameter(4, user.getPeople().getId())
-				.registerStoredProcedureParameter(5, Long.class,
-						ParameterMode.OUT);
-		query.execute();
-		return (Long) query.getOutputParameterValue(5);
+		return new ProcedureExecutor(entityManager, "add_user")
+				.in(user.getLogin()).in(user.getHashPasswd())
+				.in(user.getRole()).in(user.getPeople().getId())
+				.out(Long.class).execute().getOut(5, Long.class);
 	}
 
 	@Override
