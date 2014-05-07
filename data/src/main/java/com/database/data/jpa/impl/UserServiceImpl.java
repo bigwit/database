@@ -12,9 +12,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.database.data.domain.Contact;
+import com.database.data.domain.Location;
 import com.database.data.domain.People;
 import com.database.data.domain.User;
 import com.database.data.jpa.UserService;
+import com.database.data.jpa.procedure.ProcedureExecutor;
 
 @Repository
 @Service("userService")
@@ -92,4 +95,17 @@ public class UserServiceImpl implements UserService {
 		return addUser(user);
 	}
 
+	public Long registerUser(User user) {
+		People people = user.getPeople();
+		Contact contact = people.getContact();
+		Location location = contact.getLocation();
+		return new ProcedureExecutor(entityManager, "register_user")
+				.in(user.getLogin()).in(user.getHashPasswd())
+				.in(people.getFirstName()).in(people.getMiddleName())
+				.in(people.getLastName()).in(people.getDateBirth())
+				.in(people.getSex()).in(contact.getPhone())
+				.in(contact.getEmail()).in(location.getCountry())
+				.in(location.getCity()).in(location.getDescription())
+				.out(Long.class).execute().getOut(13, Long.class);
+	}
 }
