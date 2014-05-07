@@ -51,9 +51,7 @@ public class ProcedureExecutor {
 	@SuppressWarnings("unchecked")
 	public <TResultType> TResultType call(Object... params) {
 		setParameters(params);
-		System.out.println("set parameters");
 		procedureQuery.execute();
-		System.out.println("execute");
 		return (TResultType) procedureQuery
 				.getOutputParameterValue(returnPosition);
 	}
@@ -67,7 +65,6 @@ public class ProcedureExecutor {
 		final int countParams = procedureQuery.getParameters().size();
 		while (pos <= countParams) {
 			if (!outPositions.contains(pos)) {
-				System.out.println("set parameter: " + pos + " " + params[i]);
 				procedureQuery.setParameter(pos, params[i]);
 				i++;
 			}
