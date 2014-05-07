@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -30,10 +31,15 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment findById(Long id) {
-		return (Comment) entityManager
-				.createNativeQuery(
-						"select * from table(load_comments) where id = :id",
-						Comment.class).setParameter("id", id).getSingleResult();
+		try {
+			return (Comment) entityManager
+					.createNativeQuery(
+							"select * from table(load_comments) where id = :id",
+							Comment.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -32,10 +33,15 @@ public class FlightServiceImpl implements FlightService {
 	@Transactional(readOnly = true)
 	@Override
 	public Flight findById(Long id) {
-		return (Flight) entityManager
-				.createNativeQuery(
-						"select * from table(load_flights) where id = :id",
-						Flight.class).setParameter("id", id).getSingleResult();
+		try {
+			return (Flight) entityManager
+					.createNativeQuery(
+							"select * from table(load_flights) where id = :id",
+							Flight.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

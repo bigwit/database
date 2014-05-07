@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -32,9 +33,14 @@ public class ClientServiceImpl implements ClientService {
 	@Transactional(readOnly = true)
 	@Override
 	public Client findById(Long id) {
-		return (Client) entityManager
-				.createNativeQuery("select * from table(load_clients)",
-						Client.class).setParameter("id", id).getSingleResult();
+		try {
+			return (Client) entityManager
+					.createNativeQuery("select * from table(load_clients)",
+							Client.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

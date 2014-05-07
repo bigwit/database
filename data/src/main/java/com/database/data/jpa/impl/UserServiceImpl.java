@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.database.data.domain.People;
 import com.database.data.domain.User;
 import com.database.data.jpa.UserService;
 
@@ -33,10 +35,15 @@ public class UserServiceImpl implements UserService {
 	@Transactional(readOnly = true)
 	@Override
 	public User findById(Long id) {
-		return (User) entityManager
-				.createNativeQuery(
-						"select * from table(load_users) where id = :id",
-						User.class).setParameter("id", id).getSingleResult();
+		try {
+			return (User) entityManager
+					.createNativeQuery(
+							"select * from table(load_users) where id = :id",
+							User.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	@Override
@@ -63,11 +70,27 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User getUser(String login, String hashPasswd) {
-		return (User) entityManager
-				.createNativeQuery(
-						"select * from table(load_users) u where u.login = :login and u.hash_passwd = :hashPasswd", User.class)
-				.setParameter("login", login)
-				.setParameter("hashPasswd", hashPasswd).getSingleResult();
+		try {
+			return (User) entityManager
+					.createNativeQuery(
+							"select * from table(load_users) u where u.login = :login and u.hash_passwd = :hashPasswd",
+							User.class).setParameter("login", login)
+					.setParameter("hashPasswd", hashPasswd).getSingleResult();
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public Long addUser(String login, String hashPasswd, String role,
+			People people) {
+		User user = new User();
+		user.setLogin(login);
+		user.setHashPasswd(hashPasswd);
+		user.setRole(role);
+		user.setPeople(people);
+		return addUser(user);
 	}
 
 }

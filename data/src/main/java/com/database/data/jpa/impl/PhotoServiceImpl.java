@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import com.database.data.domain.Photo;
@@ -23,10 +24,15 @@ public class PhotoServiceImpl implements PhotoService {
 
 	@Override
 	public Photo findById(Long id) {
-		return (Photo) entityManager
-				.createNativeQuery(
-						"select * from table(load_photos) where id = :id",
-						Photo.class).setParameter("id", id).getSingleResult();
+		try {
+			return (Photo) entityManager
+					.createNativeQuery(
+							"select * from table(load_photos) where id = :id",
+							Photo.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }
