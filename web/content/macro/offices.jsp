@@ -30,12 +30,12 @@
 </c:if>
 <br>
 <div id="add_comm_office" style="display: none;">
-	<span style="margin: 10px;"> <br> <br> <span style="font-size: x-large;">Заголовок</span>
+	<div style="margin: 10px;"> <br> <span style="font-size: x-large;">Заголовок</span>
 	<br>
 		<input style="width: 80% !important; " placeholder="Введите заголовок комментария" />
 		<br> <br> <span style="font-size: x-large;">Текст комментария</span><br> 
 		<textarea placeholder="Введите комментарий" style="width: 80%; height: 150px;"></textarea> <br>
-		<input type="button" value="Добавить" class="button orange" style="margin-bottom: -15%;" />
-	</span>
+		<input type="button" value="Добавить" class="button orange" />
+	</div>
 </div>
 
