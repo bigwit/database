@@ -22,7 +22,7 @@
 		});
 		
 		$("#_devs").click(function(e) {
-			e.event.preventDefault();
+			e.preventDefault();
 			window.GrEngine.show("__stud_devs_", "Разработчики приложения");
 		});
 

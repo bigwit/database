@@ -27,6 +27,9 @@
 	<bean id="officesService" class="com.database.web.services.OfficesService" />
 	<bean id="officeService" class="com.database.data.jpa.impl.OfficeServiceImpl" />
 	<bean id="travelService" class="com.database.data.jpa.impl.TravelServiceImpl" />
+	<bean id="userService" class="com.database.data.jpa.impl.UserServiceImpl" />
+	
+	<bean id="cookieFilter" class="com.database.web.autorization.secure.CookieFilter" lazy-init="true" />
 	
 	<import resource="properties.xml"/>
 	<import resource="db-context.xml"/>

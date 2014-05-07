@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.database.data.jpa.PeopleService;
 import com.database.web.beans.PageContextBean;
 import com.database.web.beans.SiteContent;
 import com.database.web.controllers.utils.Modeller;
@@ -23,6 +24,9 @@ public class CreateUserController {
 	
 	@Autowired
 	private SiteContent siteContent;
+	
+	@Autowired
+	private PeopleService peopleService;
 	
 	@RequestMapping(value = "/createuser", method = RequestMethod.POST)
 	public String createUser(@ModelAttribute("viewuser") ViewUser user, ModelMap model) {
