@@ -60,8 +60,7 @@ public class Location {
 
 	@Override
 	public String toString() {
-		return "[location id: " + getId() + " country: " + getCountry()
-				+ " city: " + getCity() + " description: " + getDescription()
-				+ "]";
+		return "[location id: " + id + " country: " + country + " city: "
+				+ city + " description: " + description + "]";
 	}
 }

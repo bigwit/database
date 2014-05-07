@@ -11,4 +11,6 @@ public interface LocationService {
 	Location findById(Long id);
 	
 	Long addLocation(String country, String city, String description);
+	
+	Long addLocation(Location location);
 }

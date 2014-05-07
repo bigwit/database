@@ -4,11 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
-import javax.persistence.StoredProcedureQuery;
 
-import org.springframework.beans.factory.parsing.Problem;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,9 +48,14 @@ public class LocationServiceImpl implements LocationService {
 	@Override
 	public Long addLocation(String country, String city, String description) {
 		return new ProcedureExecutor(entityManager, "add_location")
-				.in(country).in(city).in(description).out(Long.class)
-				.execute()
-				.getOut(4, Long.class);
+				.in(String.class, String.class, String.class)
+				.out(Long.class).returnThis().call(country, city, description);
+	}
+
+	@Override
+	public Long addLocation(Location location) {
+		return addLocation(location.getCountry(), location.getCity(),
+				location.getDescription());
 	}
 
 }

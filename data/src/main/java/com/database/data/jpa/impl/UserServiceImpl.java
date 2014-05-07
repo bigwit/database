@@ -1,5 +1,6 @@
 package com.database.data.jpa.impl;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -50,9 +51,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public Long addUser(User user) {
 		return new ProcedureExecutor(entityManager, "add_user")
-				.in(user.getLogin()).in(user.getHashPasswd())
-				.in(user.getRole()).in(user.getPeople().getId())
-				.out(Long.class).execute().getOut(5, Long.class);
+				.in(String.class, String.class, String.class, Long.class)
+				.out(Long.class)
+				.returnThis()
+				.call(user.getLogin(), user.getHashPasswd(), user.getRole(),
+						user.getPeople().getId());
 	}
 
 	@Override
@@ -84,12 +87,16 @@ public class UserServiceImpl implements UserService {
 		Contact contact = people.getContact();
 		Location location = contact.getLocation();
 		return new ProcedureExecutor(entityManager, "register_user")
-				.in(user.getLogin()).in(user.getHashPasswd())
-				.in(people.getFirstName()).in(people.getMiddleName())
-				.in(people.getLastName()).in(people.getDateBirth())
-				.in(people.getSex()).in(contact.getPhone())
-				.in(contact.getEmail()).in(location.getCountry())
-				.in(location.getCity()).in(location.getDescription())
-				.out(Long.class).execute().getOut(13, Long.class);
+				.in(String.class, String.class, String.class, String.class,
+						String.class, Date.class, String.class, String.class,
+						String.class, String.class, String.class, String.class)
+				.out(Long.class)
+				.returnThis()
+				.call(user.getLogin(), user.getHashPasswd(),
+						people.getFirstName(), people.getMiddleName(),
+						people.getLastName(), people.getDateBirth(),
+						people.getSex(), contact.getPhone(),
+						contact.getEmail(), location.getCountry(),
+						location.getCity(), location.getDescription());
 	}
 }
