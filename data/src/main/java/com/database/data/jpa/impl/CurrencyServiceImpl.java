@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -32,11 +33,15 @@ public class CurrencyServiceImpl implements CurrencyService {
 	@Transactional(readOnly = true)
 	@Override
 	public Currency findById(Long id) {
-		return (Currency) entityManager
-				.createNativeQuery(
-						"select * from table(load_currency) where id = :id",
-						Currency.class).setParameter("id", id)
-				.getSingleResult();
+		try {
+			return (Currency) entityManager
+					.createNativeQuery(
+							"select * from table(load_currency) where id = :id",
+							Currency.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

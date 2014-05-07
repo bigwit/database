@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -42,11 +43,15 @@ public class PlacementServiceImpl implements PlacementService {
 	@Transactional(readOnly = true)
 	@Override
 	public Placement findById(Long id) {
-		return (Placement) entityManager
-				.createNativeQuery(
-						"select * from table(load_placement) where id = :id",
-						Placement.class).setParameter("id", id)
-				.getSingleResult();
+		try {
+			return (Placement) entityManager
+					.createNativeQuery(
+							"select * from table(load_placement) where id = :id",
+							Placement.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

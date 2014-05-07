@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.database.data.domain.Contact;
-import com.database.data.domain.Location;
 import com.database.data.jpa.ContactService;
 
 @Service("contactService")
@@ -44,10 +44,15 @@ public class ContactServiceImpl implements ContactService {
 	@Transactional(readOnly = true)
 	@Override
 	public Contact findById(Long id) {
-		return (Contact) entityManager
-				.createNativeQuery(
-						"select * from table(load_contacts) where id = :id",
-						Contact.class).setParameter("id", id).getSingleResult();
+		try {
+			return (Contact) entityManager
+					.createNativeQuery(
+							"select * from table(load_contacts) where id = :id",
+							Contact.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	@Override

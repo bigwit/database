@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -32,10 +33,15 @@ public class PlaceServiceImpl implements PlaceService {
 	@Transactional(readOnly = true)
 	@Override
 	public Place findById(Long id) {
-		return (Place) entityManager
-				.createNativeQuery(
-						"select * from table(load_places) where id = :id",
-						Place.class).setParameter("id", id).getSingleResult();
+		try {
+			return (Place) entityManager
+					.createNativeQuery(
+							"select * from table(load_places) where id = :id",
+							Place.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

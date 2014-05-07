@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -32,10 +33,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional(readOnly = true)
 	@Override
 	public Employee finById(Long id) {
-		return (Employee) entityManager.createNativeQuery(
-				"select * from table(load_employees) where id = :id", Employee.class)
-				.setParameter("id", id)
-				.getSingleResult();
+		try {
+			return (Employee) entityManager
+					.createNativeQuery(
+							"select * from table(load_employees) where id = :id",
+							Employee.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

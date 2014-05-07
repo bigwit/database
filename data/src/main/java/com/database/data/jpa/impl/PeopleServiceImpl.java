@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.ParameterMode;
 import javax.persistence.PersistenceContext;
 import javax.persistence.StoredProcedureQuery;
@@ -41,10 +42,15 @@ public class PeopleServiceImpl implements PeopleService {
 
 	@Override
 	public People findById(Long id) {
-		return (People) entityManager
-				.createNativeQuery(
-						"select * from table(load_peoples) where id = :id",
-						People.class).setParameter("id", id).getSingleResult();
+		try {
+			return (People) entityManager
+					.createNativeQuery(
+							"select * from table(load_peoples) where id = :id",
+							People.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 	@Override

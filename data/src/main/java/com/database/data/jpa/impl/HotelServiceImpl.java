@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -30,10 +31,15 @@ public class HotelServiceImpl implements HotelService {
 
 	@Override
 	public Hotel findById(Long id) {
-		return (Hotel) entityManager
-				.createNativeQuery(
-						"select * from table(load_hotels) where id = :id",
-						Hotel.class).setParameter("id", id).getSingleResult();
+		try {
+			return (Hotel) entityManager
+					.createNativeQuery(
+							"select * from table(load_hotels) where id = :id",
+							Hotel.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

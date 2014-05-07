@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Service;
@@ -29,10 +30,15 @@ public class FoodServiceImpl implements FoodService {
 
 	@Override
 	public Food findById(Long id) {
-		return (Food) entityManager
-				.createNativeQuery(
-						"select * from table(load_food) where id = :id",
-						Food.class).setParameter("id", id).getSingleResult();
+		try {
+			return (Food) entityManager
+					.createNativeQuery(
+							"select * from table(load_food) where id = :id",
+							Food.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

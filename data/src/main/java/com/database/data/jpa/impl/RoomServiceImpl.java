@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -27,10 +28,14 @@ public class RoomServiceImpl implements RoomService {
 
 	@Override
 	public Room findById(Long id) {
-		return (Room) entityManager
-				.createNativeQuery(
-						"select * from table(load_rooms) where id = :id")
-				.setParameter("id", id).getSingleResult();
+		try {
+			return (Room) entityManager
+					.createNativeQuery(
+							"select * from table(load_rooms) where id = :id")
+					.setParameter("id", id).getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }

@@ -3,6 +3,7 @@ package com.database.data.jpa.impl;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -31,10 +32,15 @@ public class TourServiceImpl implements TourService {
 	@Transactional(readOnly = true)
 	@Override
 	public Tour findById(Long id) {
-		return (Tour) entityManager
-				.createNativeQuery(
-						"select * from table(load_tours) where id = :id",
-						Tour.class).setParameter("id", id).getSingleResult();
+		try {
+			return (Tour) entityManager
+					.createNativeQuery(
+							"select * from table(load_tours) where id = :id",
+							Tour.class).setParameter("id", id)
+					.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		}
 	}
 
 }
