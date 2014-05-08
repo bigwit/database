@@ -10,4 +10,6 @@ public interface CommentService {
 	
 	Comment findById(Long id);
 	
+	
+	Long addComment(String text, Long idHotel, Long idClient, Long idPlace, Long idOffice);
 }

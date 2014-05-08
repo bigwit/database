@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.database.data.domain.Employee;
 import com.database.data.jpa.EmployeeService;
+import com.database.data.jpa.procedure.ProcedureExecutor;
 
 @SuppressWarnings("unchecked")
 @Service("employeeService")
@@ -42,6 +43,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public Long addEmployee(String position, Float salary, Long bonus,
+			String status, String description, Long idOffice, Long idPeople,
+			Long idCurrency) {
+		return new ProcedureExecutor(entityManager, "add_employee")
+				.in(String.class, Float.class, Long.class, String.class,
+						String.class, String.class, Long.class, Long.class,
+						Long.class)
+				.out(Long.class)
+				.returnThis()
+				.call(position, salary, bonus, status, description, idOffice,
+						idPeople, idCurrency);
 	}
 
 }

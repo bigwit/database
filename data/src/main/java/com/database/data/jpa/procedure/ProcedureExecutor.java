@@ -17,8 +17,7 @@ public class ProcedureExecutor {
 
 	private int returnPosition;
 
-	public ProcedureExecutor(EntityManager entityManager, String procedureName,
-			Class<?>... paramTypes) {
+	public ProcedureExecutor(EntityManager entityManager, String procedureName) {
 		procedureQuery = entityManager
 				.createStoredProcedureQuery(procedureName);
 		outPositions = new HashSet<>();

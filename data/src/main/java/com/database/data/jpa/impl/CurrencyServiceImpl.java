@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.database.data.domain.Currency;
 import com.database.data.jpa.CurrencyService;
+import com.database.data.jpa.procedure.ProcedureExecutor;
 
 @Repository
 @Service("currencyService")
@@ -42,6 +43,13 @@ public class CurrencyServiceImpl implements CurrencyService {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public Long addCurrency(String description, Float rate) {
+		return new ProcedureExecutor(entityManager, "add_currency")
+				.in(String.class, Long.class).out(Long.class).returnThis()
+				.call(description, rate);
 	}
 
 }

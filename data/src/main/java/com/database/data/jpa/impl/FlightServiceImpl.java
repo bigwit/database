@@ -1,5 +1,6 @@
 package com.database.data.jpa.impl;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.database.data.domain.Flight;
 import com.database.data.jpa.FlightService;
+import com.database.data.jpa.procedure.ProcedureExecutor;
 
 @Repository
 @Service("flightService")
@@ -42,6 +44,19 @@ public class FlightServiceImpl implements FlightService {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public Long addFlight(Date leavingDate, Date arrivalDate,
+			String typeTransport, Float price, Long idTour, Long idLocationTo,
+			Long idLocationFrom, Long idCurrency) {
+		return new ProcedureExecutor(entityManager, "add_flight")
+				.in(Date.class, Date.class, String.class, Float.class,
+						Long.class, Long.class, Long.class, Long.class)
+				.out(Long.class)
+				.returnThis()
+				.call(leavingDate, arrivalDate, typeTransport, price, idTour,
+						idLocationTo, idLocationFrom, idCurrency);
 	}
 
 }

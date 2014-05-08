@@ -41,6 +41,7 @@ public class LocationServiceImpl implements LocationService {
 							Location.class).setParameter("id", id)
 					.getSingleResult();
 		} catch (NoResultException e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

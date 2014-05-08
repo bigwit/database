@@ -26,8 +26,8 @@ public class UserServiceImpl implements UserService {
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	@Transactional(readOnly = true)
 	@SuppressWarnings("unchecked")
+	@Transactional(readOnly = true)
 	@Override
 	public List<User> findAll() {
 		return entityManager.createNativeQuery(

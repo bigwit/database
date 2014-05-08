@@ -34,9 +34,10 @@ public class LocationServiceTest {
 		Location location = new Location();
 		location.setCity("Orel");
 		location.setCountry("Russia");
-		location.setDescription("");
+		location.setDescription("ул. Металлургов");
 		
 		Long ident = locationService.addLocation(location);
+		assertFalse(ident == -1L);
 		assertNotNull(ident);
 		location.setId(ident);
 		
@@ -44,6 +45,15 @@ public class LocationServiceTest {
 		assumeNotNull(loaded);
 		
 		assertThat(location.toString(), is(loaded.toString()));
+	}
+	
+	public void testAddLocationWithNullCountry() {
+		
+	}
+	
+	@Test(expected = NullPointerException.class)
+	public void testAddLocationWithNullArg() {
+		locationService.addLocation(null);
 	}
 
 	@AfterClass
