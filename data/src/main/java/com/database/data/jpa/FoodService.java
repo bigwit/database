@@ -10,4 +10,6 @@ public interface FoodService {
 	
 	Food findById(Long id);
 	
+	Long addFood(String type, Float price, Long idCurrency);
+	
 }
