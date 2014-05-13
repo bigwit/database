@@ -3,7 +3,6 @@ package com.database.data.jpa;
 import java.util.List;
 
 import com.database.data.domain.Contact;
-import com.database.data.domain.Location;
 
 public interface ContactService {
 

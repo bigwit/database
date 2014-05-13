@@ -10,4 +10,5 @@ public interface CurrencyService {
 	
 	Currency findById(Long id);
 	
+	Long addCurrency(String description, Float rate);
 }

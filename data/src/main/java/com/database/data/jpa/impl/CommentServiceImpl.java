@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.database.data.domain.Comment;
 import com.database.data.jpa.CommentService;
+import com.database.data.jpa.procedure.ProcedureExecutor;
 
 @Repository
 @Service("commentService")
@@ -40,6 +41,15 @@ public class CommentServiceImpl implements CommentService {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public Long addComment(String text, Long idHotel, Long idClient,
+			Long idPlace, Long idOffice) {
+		return new ProcedureExecutor(entityManager, "add_comment")
+				.in(String.class, Long.class, Long.class, Long.class,
+						Long.class).out(Long.class).returnThis()
+				.call(text, idHotel, idClient, idPlace, idOffice);
 	}
 
 }

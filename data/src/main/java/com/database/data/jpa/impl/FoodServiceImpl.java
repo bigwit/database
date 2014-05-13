@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.database.data.domain.Food;
 import com.database.data.jpa.FoodService;
+import com.database.data.jpa.procedure.ProcedureExecutor;
 
 @Repository
 @Service("foodService")
@@ -39,6 +40,13 @@ public class FoodServiceImpl implements FoodService {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public Long addFood(String type, Float price, Long idCurrency) {
+		return new ProcedureExecutor(entityManager, "add_food")
+				.in(String.class, Float.class, Long.class).out(Long.class)
+				.returnThis().call(type, price, idCurrency);
 	}
 
 }
