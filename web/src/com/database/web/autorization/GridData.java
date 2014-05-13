@@ -56,6 +56,18 @@ public class GridData {
 			}
 		}
 	}
+	
+	public void removeUser(User user) {
+		if(user == null) {
+			return;
+		}
+		for(String s : users.keySet()) {
+			if(users.get(s) == user) {
+				users.remove(s);
+				return;
+			}
+		}
+	}
 
 	public User getUser(String cookie) {
 		if (cookie == null) {
@@ -82,6 +94,7 @@ public class GridData {
 
 	private class Cleaner implements Runnable {
 
+		@SuppressWarnings("deprecation")
 		@Override
 		public void run() {
 			while (true) {

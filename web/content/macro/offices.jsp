@@ -18,11 +18,12 @@
 				<tr>
 					<td>${office.getName()}</td>
 					<td>${office.getContact().getLocation().getCountry()}
-						${office.getContact().getLocation().getCity()}</td>
+						${office.getContact().getLocation().getCity()}
+						${office.getContact().getLocation().getDescription()}</td>
 					<td>${office.getContact().getPhone()}</td>
 					<td>${office.getContact().getEmail()}</td>
 					<c:if test="${not empty onlineUser}">
-						<td><span data-add-comment>Добавить комментарий</span></td>
+						<td><span data-add-comment style="cursor: pointer;">Добавить комментарий</span></td>
 					</c:if>
 				</tr>
 			</c:forEach>

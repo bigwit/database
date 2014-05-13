@@ -14,4 +14,11 @@ public class SecureCookie {
 		res.addCookie(cookie);
 	}
 	
+	public static void resetCookie(HttpServletResponse res) {
+		Cookie cookie = new Cookie(COOKIE_NAME, "kill_self");
+		cookie.setMaxAge(1); // 1 sec
+		cookie.setSecure(false);
+		res.addCookie(cookie);
+	}
+	
 }

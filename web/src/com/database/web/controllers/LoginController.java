@@ -50,10 +50,10 @@ public class LoginController {
 					"Пользователя с такой комбинацией логина и пароля не существует");
 			return model;
 		}
-		if (user.getRole() == Role.ADMIN.toString()) {
+		if (user.getRole().equals(Role.ADMIN.toString())) {
 			model = new ModelAndView(Modeller.ROOT_VIEW_ADMIN);
 		}
-		if (user.getRole() == Role.EMPLOYEE.toString()) {
+		if (user.getRole().equals(Role.EMPLOYEE.toString())) {
 			model = new ModelAndView(Modeller.ROOT_VIEW_EMPLOYEE);
 		}
 		pageContextBean.setContent(siteContent.getDefaultPage());
