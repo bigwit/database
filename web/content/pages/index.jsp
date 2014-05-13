@@ -16,11 +16,12 @@
 <link href="http://www.favicon.cc/favicon/593/2/favicon.png"
 	rel="shortcut icon" type="image/x-icon" />
 <script type="text/javascript" src="resources/js/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="resources/js/grlib.js"></script>
 <script type="text/javascript" src="resources/js/main.js"></script>
 <title>${title}</title>
 </head>
-<div id="message" class="message">${message}</div>
 <body style="min-width: 900px;">
+<div id="message" class="message">${message}</div>
 	<div align="center" style="margin-left: 10%; margin-right: 10%;">
 		<jsp:include page="${Header}"></jsp:include>
 	</div>
@@ -40,5 +41,18 @@
 	<div align="center" style="margin-left: 10%; margin-right: 10%;">
 		<jsp:include page="${footer}"></jsp:include>
 	</div>
+	
+	<!-- MODAL WINDOWS TEMPLATES -->
+	<div id="curtain" class="blocker"></div>
+	<div id="window" style="display: none;">
+		<div id="headLineLbl" class="head-line">Заголовок</div>
+		<div id="mainSpace" class="base-frame">
+			<br>
+			<div id="cntnt">
+				Сообщение
+			</div>
+		</div>
+	</div>
+	
 </body>
 </html>

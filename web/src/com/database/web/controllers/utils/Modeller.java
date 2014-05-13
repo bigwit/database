@@ -1,16 +1,23 @@
 package com.database.web.controllers.utils;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import com.database.web.beans.PageContextBean;
+import com.database.web.forms.ViewSearchForm;
 
 public class Modeller {
 
 	/**
-	 * Базовая JSP используемая в качестве шаблона для постоения страницы.
+	 * Базовые JSP используемые в качестве шаблона для постоения страниц.
 	 */
 	public static final String ROOT_VIEW = "index";
 
+	public static final String ROOT_VIEW_EMPLOYEE = "besttour";
+
+	public static final String ROOT_VIEW_ADMIN = "dnm";
+	
 	/**
 	 * Объект, используемый для получения ModelAndView в качестве имени модели.
 	 * Применяется на станицах где используются <form:form>
@@ -22,6 +29,8 @@ public class Modeller {
 	private static final String MESSAGE_KEY = "message";
 	private static final String HEADER_KEY = "Header";
 	private static final String FOOTER_KEY = "footer";
+	
+	public static final String UNKNOWN_ERROR_MESSAGE = "База данных временно не доступна";
 
 	/**
 	 * Метод вытаскивает баозвый контекст любой страницы из бина (хранилища
@@ -34,7 +43,7 @@ public class Modeller {
 	 *            source of model parameters
 	 */
 	public static void addDefaultModels(ModelAndView model,
-			PageContextBean pageContext) {
+			PageContextBean pageContext, HttpServletRequest request) {
 		model.addObject(HEADER_KEY, pageContext.getHeader());
 		model.addObject(FOOTER_KEY, pageContext.getFooter());
 		model.addObject("menu", pageContext.getMenu());
@@ -42,6 +51,10 @@ public class Modeller {
 		model.addObject("title", pageContext.getTitle());
 		model.addObject("encoding", pageContext.getEncoding());
 		model.addObject(MESSAGE_KEY, "");
+		model.addObject("query", new ViewSearchForm());
+		model.addObject("placeholderSearch", PLACEHOLDER_SEARCH_LABEL);
+		model.addObject("onlineUser", request.getAttribute("USER"));
+		
 	}
 
 	/**
@@ -63,6 +76,10 @@ public class Modeller {
 	 */
 
 	public static final String PLACEHOLDER_SEARCH_LABEL = "Введите запрос";
+
+	public static void setErrorMessage(ModelAndView model) {
+		addMessage(model, UNKNOWN_ERROR_MESSAGE);
+	}
 	
 	
 }

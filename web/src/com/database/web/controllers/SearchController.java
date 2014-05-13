@@ -1,5 +1,7 @@
 package com.database.web.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,12 +31,12 @@ public class SearchController {
 	private SiteContent siteContent;
 	
 	@RequestMapping(value = "/sch", method = RequestMethod.POST)
-	public ModelAndView search(@ModelAttribute("query") ViewSearchForm query, ModelMap model) {		
+	public ModelAndView search(@ModelAttribute("query") ViewSearchForm query, 
+			ModelMap model, HttpServletRequest request) {		
 		ModelAndView view = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getSearchPage());
-		Modeller.addDefaultModels(view, pageContextBean);
+		Modeller.addDefaultModels(view, pageContextBean, request);
 		model.addAllAttributes(view.getModelMap());
-		view.addObject("placeholderSearch", Modeller.PLACEHOLDER_SEARCH_LABEL);
 		
 		if(query != null && query.getQuery() != null && !query.getQuery().isEmpty()) {
 			ResultSearch results = searchService.search(query);

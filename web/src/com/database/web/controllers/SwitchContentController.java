@@ -1,5 +1,7 @@
 package com.database.web.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,55 +25,43 @@ public class SwitchContentController {
 	private SiteContent siteContent;
 	
 	@RequestMapping(value="/main")
-	protected ModelAndView handleGet(@ModelAttribute("viewuser") ViewUser user, ModelMap attrs) {
-		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW,
-				Modeller.VIEW_SEARCH_FORM_QUERY_NAME, new ViewSearchForm());
+	protected ModelAndView handleGet(@ModelAttribute("viewuser") ViewUser user, ModelMap attrs, HttpServletRequest request) {
+		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getDefaultPage());
-		Modeller.addDefaultModels(model, pageContextBean);
-		model.addObject("placeholderSearch", Modeller.PLACEHOLDER_SEARCH_LABEL);
+		Modeller.addDefaultModels(model, pageContextBean, request);
 		return model;
 	}
 	
 	@RequestMapping(value="/create")
-	public ModelAndView createPage() {
+	public ModelAndView createPage(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW,
 				Modeller.VIEW_USER_ATTRIBUTE_NAME, new ViewUser());
 		pageContextBean.setContent(siteContent.getCreatePage());
-		Modeller.addDefaultModels(model, pageContextBean);
+		Modeller.addDefaultModels(model, pageContextBean, request);
 		return model;
 	}
 	
 	@RequestMapping(value="/search")
-	public ModelAndView searchPage() {
-		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW,
-				Modeller.VIEW_SEARCH_FORM_QUERY_NAME, new ViewSearchForm());
-		pageContextBean.setContent(siteContent.getSearchPage());
-		Modeller.addDefaultModels(model, pageContextBean);
-		model.addObject("placeholderSearch", Modeller.PLACEHOLDER_SEARCH_LABEL);
-		return model;
-	}
-	
-	@RequestMapping(value="/clients")
-	public ModelAndView clientsPage() {
+	public ModelAndView searchPage(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
-		pageContextBean.setContent(siteContent.getClientsPage());
-		Modeller.addDefaultModels(model, pageContextBean);
+		pageContextBean.setContent(siteContent.getSearchPage());
+		Modeller.addDefaultModels(model, pageContextBean, request);
 		return model;
 	}
 	
 	@RequestMapping(value="/desc")
-	public ModelAndView descPage() {
+	public ModelAndView descPage(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getDescriptorPage());
-		Modeller.addDefaultModels(model, pageContextBean);
+		Modeller.addDefaultModels(model, pageContextBean, request);
 		return model;
 	}
 	
 	@RequestMapping(value="/about")
-	public ModelAndView aboutPage() {
+	public ModelAndView aboutPage(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView(Modeller.ROOT_VIEW);
 		pageContextBean.setContent(siteContent.getAboutPage());
-		Modeller.addDefaultModels(model, pageContextBean);
+		Modeller.addDefaultModels(model, pageContextBean, request);
 		return model;
 	}
 }
