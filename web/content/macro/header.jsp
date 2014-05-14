@@ -18,10 +18,12 @@
 		</div>
 	</c:if>
 	<c:if test="${not empty onlineUser}">
-		<div>
-			Welcome, ${onlineUser.getLogin()} 
-			<div id="person" class="">Персональные данные</div>
+		<div class="login-panel">
+			Здравствуйте, ${onlineUser.getLogin()}
+			<br>
 			<!-- добавить линк по которомы выкидивать окно с инфой о юзере -->
+			<div id="person" class="office-comments-link" onclick="window.getPersonalData();">Персональные данные</div>
+			<a href="/database/logout" >Выйти</a>
 		</div>
 	</c:if>
 </div><br>

@@ -25,6 +25,9 @@
 			alert('не удалось =(');
 			return;
 		}
+		for(var i = 0; content.childNodes.length > i; ++i) {
+			content.childNodes[i].id = "viewport" + content.childNodes[i].nodeType;
+		}
 		// set title
 		this.HEAD_LINE_DIV.innerHTML = title != null ? title
 				: this.DEFAULT_TITLE;
@@ -35,6 +38,7 @@
 		var closer = document.createElement("input");
 		closer.value = "Закрыть";
 		closer.type = "button";
+		closer.id = "closer-button";
 		closer.setAttribute("class", "button orange close");
 		closer.addEventListener("click", function(event) {
 			window.GrEngine.hide();

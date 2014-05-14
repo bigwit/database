@@ -341,6 +341,14 @@
 	font-size: larger;
 }
 
+.office-comments-link {
+	cursor: pointer;
+}
+
+.office-comments-link : HOVER {
+	text-decoration: underline;
+}
+
 
 
 
