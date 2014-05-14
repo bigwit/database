@@ -43,4 +43,19 @@ public class ClientServiceImpl implements ClientService {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public Client findByPeopleId(Long peopleId) {
+		List<Client> loaded = entityManager
+				.createNativeQuery(
+						"select * from table(find_client_by_people(:peopleId))",
+						Client.class).setParameter("peopleId", peopleId)
+				.getResultList();
+		if (loaded.size() > 0) {
+			return loaded.get(0);
+		} else {
+			return null;
+		}
+	}
+
 }

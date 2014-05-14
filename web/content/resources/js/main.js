@@ -132,6 +132,33 @@
 									window.GrEngine.show("add_comm_office","Добавить комментарий");
 								});
 						});
+						
+						$("[data-show-comment]").each(
+							function(i, elem) {
+								$(elem).click(function(e) {
+									$.ajax({
+										type : "POST",
+										url : "/database/getcomments",
+										data : {
+											officeId : e.currentTarget.id
+										}
+									}).done(function(msg) {
+										if(msg == null || msg == '') {
+											return;
+										} 
+										var div = document.createElement("div");
+										div.style.display = "none";
+										div.id="allComments";
+										div.innerHTML = msg;
+										window.GrEngine.show("allComments", "Комментарии к офису");
+									}).fail(function() {
+										$("#closer-button").click();
+										$("#message")
+										.html("Невозможно показать коммeнтарии");
+										window.showMessage();
+									});
+								});
+						});
 
 						$("#signin").click(function(e) {
 							e.preventDefault();

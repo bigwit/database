@@ -22,14 +22,14 @@
 		<property name="driverClassName" value="${jdbc.driverClassName}" />
 	</bean>
   
-	<jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
+	<!-- <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL">
 		<jdbc:script location="classpath:sql/create.sql" separator=";" />
 		<jdbc:script location="classpath:sql/trigger.sql" separator="//" />
 		<jdbc:script location="classpath:sql/gen.sql" separator=";" />
 		<jdbc:script location="classpath:sql/types.sql" separator=";" />
 		<jdbc:script location="classpath:sql/pipelined-func.sql" separator="/" />
 		<jdbc:script location="classpath:sql/procedures.sql" separator="//" />
-	</jdbc:initialize-database>
+	</jdbc:initialize-database> -->
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 

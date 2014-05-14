@@ -28,6 +28,9 @@
 	<bean id="officeService" class="com.database.data.jpa.impl.OfficeServiceImpl" />
 	<bean id="travelService" class="com.database.data.jpa.impl.TravelServiceImpl" />
 	<bean id="userService" class="com.database.data.jpa.impl.UserServiceImpl" />
+	<bean id="clientService" class="com.database.data.jpa.impl.ClientServiceImpl" />
+	<bean id="peopleService" class="com.database.data.jpa.impl.PeopleServiceImpl" />
+	
 	
 	<bean id="cookieFilter" class="com.database.web.autorization.secure.CookieFilter" lazy-init="true" />
 	

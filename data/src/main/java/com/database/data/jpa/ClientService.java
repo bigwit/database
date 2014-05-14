@@ -10,4 +10,6 @@ public interface ClientService {
 	
 	Client findById(Long id);
 	
+	Client findByPeopleId(Long peopleId);
+	
 }

@@ -4,9 +4,8 @@ import java.util.List;
 
 import com.database.data.domain.Tour;
 
-public interface TourService {
+public interface SearchService {
 
-	List<Tour> findAll();
+	List<Tour> searchTours(String searchLine);
 	
-	Tour findById(Long id);
 }
