@@ -72,6 +72,30 @@
 							document.body.appendChild(form);
 							form.submit();
 						};
+						
+						window.getPersonalData = function() {
+							
+							$.ajax({
+								type : "POST",
+								url : "/database/cabinet",
+								data : {
+									titleText : headInput.value,
+									text : textInput.value,
+									office: window.currCommWinId
+								}
+							}).done(function(msg) {
+								$("#closer-button").click();
+								$("#message")
+								.html("Комментарий успешно добавлен");
+								window.showMessage();
+							}).fail(function() {
+								$("#closer-button").click();
+								$("#message")
+								.html("Не удалось добавить комментарий =(");
+								window.showMessage();
+							});
+							
+						};
 
 						$("[data-menu]").each(function(i, elem) {
 							$(elem).click(function() {

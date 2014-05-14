@@ -11,7 +11,7 @@
 			<th>Телефон</th>
 			<th>E-mail</th>
 			<c:if test="${not empty onlineUser}">
-				<th>Дополнительно</th>
+				<th>Комментарии</th>
 			</c:if>
 
 			<c:forEach var="office" items="${offices}">
@@ -23,7 +23,10 @@
 					<td>${office.getContact().getPhone()}</td>
 					<td>${office.getContact().getEmail()}</td>
 					<c:if test="${not empty onlineUser}">
-						<td><span id="${office.getId()}" data-add-comment style="cursor: pointer;">Добавить комментарий</span></td>
+						<td>
+							<span id="${office.getId()}" data-add-comment class="office-comments-link">Добавить </span>|
+							<span id="${office.getId()}" data-show-comment class="office-comments-link"> Просмотреть</span>
+						</td>
 					</c:if>
 				</tr>
 			</c:forEach>
