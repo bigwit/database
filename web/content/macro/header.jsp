@@ -20,9 +20,9 @@
 	<c:if test="${not empty onlineUser}">
 		<div class="login-panel">
 			Здравствуйте, ${onlineUser.getLogin()}
+			<br>
 			<!-- добавить линк по которомы выкидивать окно с инфой о юзере -->
 			<div id="person" class="">Персональные данные</div>
-			<br>
 			<a href="/database/logout" >Выйти</a>
 		</div>
 	</c:if>

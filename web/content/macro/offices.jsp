@@ -23,7 +23,7 @@
 					<td>${office.getContact().getPhone()}</td>
 					<td>${office.getContact().getEmail()}</td>
 					<c:if test="${not empty onlineUser}">
-						<td><span data-add-comment style="cursor: pointer;">Добавить комментарий</span></td>
+						<td><span id="${office.getId()}" data-add-comment style="cursor: pointer;">Добавить комментарий</span></td>
 					</c:if>
 				</tr>
 			</c:forEach>
@@ -33,10 +33,10 @@
 <div id="add_comm_office" style="display: none;">
 	<div style="margin: 10px;"> <br> <span style="font-size: x-large;">Заголовок</span>
 	<br>
-		<input style="width: 80% !important; " placeholder="Введите заголовок комментария" />
+		<input data-header-comment="on" style="width: 80% !important; " placeholder="Введите заголовок комментария" />
 		<br> <br> <span style="font-size: x-large;">Текст комментария</span><br> 
-		<textarea placeholder="Введите комментарий" style="width: 80%; height: 150px;"></textarea> <br>
-		<input type="button" value="Добавить" class="button orange" />
+		<textarea placeholder="Введите комментарий" style="width: 80%; height: 150px; max-height: 200px; max-width: 80%;"></textarea> <br>
+		<input type="button" value="Добавить" class="button orange" onclick="window.send(this, {type : 'comment'});" />
 	</div>
 </div>
 
