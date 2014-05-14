@@ -9,5 +9,4 @@ public interface TourService {
 	List<Tour> findAll();
 	
 	Tour findById(Long id);
-	
 }

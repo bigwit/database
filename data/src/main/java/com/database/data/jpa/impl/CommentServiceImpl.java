@@ -48,8 +48,21 @@ public class CommentServiceImpl implements CommentService {
 			Long idPlace, Long idOffice) {
 		return new ProcedureExecutor(entityManager, "add_comment")
 				.in(String.class, Long.class, Long.class, Long.class,
-						Long.class).out(Long.class).returnThis()
-				.call(text, idHotel, idClient, idPlace, idOffice);
+						Long.class)
+				.out(Long.class)
+				.returnThis()
+				.call(text, (idHotel == null) ? -1L : idHotel, idClient,
+						(idPlace == null) ? -1L : idPlace,
+						(idOffice == null) ? -1L : idOffice);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Comment> findCommentsByOffice(Long officeId) {
+		return entityManager
+				.createNativeQuery(
+						"select * from table(load_comments) where id_office = :idOffice")
+				.setParameter("idOffice", officeId).getResultList();
 	}
 
 }

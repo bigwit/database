@@ -1,6 +1,7 @@
 package com.database.web.controllers;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.database.data.domain.Comment;
+import com.database.data.domain.People;
 import com.database.data.domain.User;
 import com.database.data.jpa.ClientService;
 import com.database.data.jpa.CommentService;
@@ -54,21 +57,30 @@ public class CommentsController {
 		}
 		String header = request.getParameter("titleText");
 		User user = (User)request.getAttribute("USER");
-		long clientId = clientService.findById(user.getPeople().getId()).getId();
+		People people = user.getPeople();
+		log.info(people.toString());
+		Long peopleId = people.getId();
+		log.info("people id: " + peopleId);
+		long clientId = clientService.findByPeopleId(peopleId).getId();
 		String.format("Add comment: \nheader = %s, \ntext = %s, "
 				+ "\noffice id = %s, \nclient id = %s", 
 				header,  text, id, String.valueOf(clientId));
 		log.info("ADD COMMENT: TEXT = " + text + ", id_office = " + id + " HEADER = " + header);
-		commentService.addComment(text, null, clientId, null, officeId);
+		Long idComment = commentService.addComment(text, null, clientId, null, officeId);
+		log.info("ID NEW COMMENT: " + idComment);
 	}
 	
 	@RequestMapping(value = "/getcomments")
 	public ModelAndView getAllCommentsForOffice(HttpServletRequest request,
 			HttpServletResponse response) {
 		ModelAndView model = new ModelAndView("comments");
-		
-		// load comments from database
-		
+		log.info("Office id = " + request.getParameter("officeId"));
+		Long officeId = 1L;
+		try {
+			officeId = Long.parseLong(request.getParameter("officeId"));
+		} catch(Exception ex) {	}
+		List<Comment> comments = commentService.findCommentsByOffice(officeId);
+		model.addObject("comms", comments);
 		return model;
 	}
 	

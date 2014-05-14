@@ -1,16 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="header">
 	<div class="text-logo">
 		Курсовая работа <br>
-		"Приложение к базе данных <br>турагенства"
+		"Приложение к базе <br>
+		данных турагенства"
 	</div>
-	<div class="login-panel">
-		<input width="100%" placeholder="логин"/><br>
-		<input width="100%" placeholder="пароль"/><br>
-		<a href="#" class="head-link color-orange">Войти</a>
-		<a href="/database/create" class="head-link color-orange">Регистрация</a>
-	<br>
-	</div>
+	<c:if test="${empty onlineUser}">
+		<div class="login-panel">
+			<input id="25dfddh6nf" name="login" width="100%" placeholder="логин"/><br>
+			<input id="df5h1hyj35fu" name="passwd" width="100%" placeholder="пароль" type="password" /><br>
+			<a id="signin" href="#" class="head-link color-orange">Войти</a>
+			<a href="/database/create" class="head-link color-orange">Регистрация</a>
+			<br>
+		</div>
+	</c:if>
+	<c:if test="${not empty onlineUser}">
+		<div class="login-panel">
+			Здравствуйте, ${onlineUser.getLogin()}
+			<br>
+			<!-- добавить линк по которомы выкидивать окно с инфой о юзере -->
+			<div id="person" class="office-comments-link" onclick="window.getPersonalData();">Персональные данные</div>
+			<a href="/database/logout" >Выйти</a>
+		</div>
+	</c:if>
 </div><br>

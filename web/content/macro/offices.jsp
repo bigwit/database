@@ -13,7 +13,7 @@
 			<c:if test="${not empty onlineUser}">
 				<th>Комментарии</th>
 			</c:if>
-
+		</tr>
 			<c:forEach var="office" items="${offices}">
 				<tr>
 					<td>${office.getName()}</td>
