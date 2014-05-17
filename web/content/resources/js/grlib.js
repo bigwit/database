@@ -35,15 +35,16 @@
 		// set content
 		this.CONTENT_DIV.innerHTML = content.innerHTML;
 		
+		// create 
 		var closer = document.createElement("input");
-		closer.value = "Закрыть";
+		closer.value = "X";
 		closer.type = "button";
 		closer.id = "closer-button";
-		closer.setAttribute("class", "button orange close");
+		closer.setAttribute("class", "button close");
 		closer.addEventListener("click", function(event) {
 			window.GrEngine.hide();
 		});
-		this.CONTENT_DIV.appendChild(closer);
+		this.HEAD_LINE_DIV.appendChild(closer);
 
 		// bloked screen
 		$("#" + this.BLOKER_DIV_ID).show("fast");
@@ -54,7 +55,7 @@
 
 	WindowEngine.prototype.hide = function() {
 		if (this.idContent == null) {
-			alert("окна уже закрыты");
+			//alert("окна уже закрыты");
 			return;
 		}
 		$("#" + this.WIN_TEMPLATE_ID).hide("slow");

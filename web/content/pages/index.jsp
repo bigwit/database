@@ -45,7 +45,9 @@
 	<!-- MODAL WINDOWS TEMPLATES -->
 	<div id="curtain" class="blocker"></div>
 	<div id="window" style="display: none;">
-		<div id="headLineLbl" class="head-line">Заголовок</div>
+		<div id="headLineLbl" class="head-line">Заголовок
+			<span>X</span>
+		</div>
 		<div id="mainSpace" class="base-frame">
 			<br>
 			<div id="cntnt">
@@ -54,5 +56,9 @@
 		</div>
 	</div>
 	
+	<!-- My cabinet person -->
+	<div id="commonPanel" style="display: none; margin: 10px;" ></div>
 </body>
 </html>
+
+

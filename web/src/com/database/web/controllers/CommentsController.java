@@ -57,9 +57,7 @@ public class CommentsController {
 		}
 		String header = request.getParameter("titleText");
 		User user = (User)request.getAttribute("USER");
-
-		long clientId = clientService.findById(user.getPeople().getId()).getId();
-
+		
 		People people = user.getPeople();
 		log.info(people.toString());
 		Long peopleId = people.getId();
@@ -71,7 +69,7 @@ public class CommentsController {
 				header,  text, id, String.valueOf(clientId));
 		log.info("ADD COMMENT: TEXT = " + text + ", id_office = " + id + " HEADER = " + header);
 
-		commentService.addComment(text, null, clientId, null, officeId);
+		commentService.addComment(header + ":\n" + text, null, clientId, null, officeId);
 	}
 	
 	@RequestMapping(value = "/getcomments")

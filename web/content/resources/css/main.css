@@ -328,9 +328,23 @@
 .close {
 	position: relative;
 	float: right;
-	margin-top: 15%;
+	margin-top: 5px;
 	margin-bottom: 15px;
-	right: 15px;
+	right: 5px;
+	width: 30px;
+	border-radius: 30px;
+	text-align: center;
+	vertical-align: middle;
+	padding: 5px;
+	border: solid 0px white;
+	background-color: white;
+	color: orange;
+	height: 30px;
+}
+
+.close:hover {
+	color: black;
+	background-color: #BBB
 }
 
 .title-win {
@@ -345,7 +359,7 @@
 	cursor: pointer;
 }
 
-.office-comments-link : HOVER {
+.office-comments-link:hover {
 	text-decoration: underline;
 }
 

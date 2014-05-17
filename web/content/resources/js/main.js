@@ -77,24 +77,16 @@
 							
 							$.ajax({
 								type : "POST",
-								url : "/database/cabinet",
-								data : {
-									titleText : headInput.value,
-									text : textInput.value,
-									office: window.currCommWinId
-								}
+								url : "/database/cabinet"
 							}).done(function(msg) {
-								$("#closer-button").click();
-								$("#message")
-								.html("Комментарий успешно добавлен");
+								$("#commonPanel").html("<br>" + msg);
+								window.GrEngine.show("commonPanel", "Мои данные");
 								window.showMessage();
 							}).fail(function() {
-								$("#closer-button").click();
 								$("#message")
-								.html("Не удалось добавить комментарий =(");
+								.html("Сервер не доступен");
 								window.showMessage();
 							});
-							
 						};
 
 						$("[data-menu]").each(function(i, elem) {
@@ -146,13 +138,9 @@
 										if(msg == null || msg == '') {
 											return;
 										} 
-										var div = document.createElement("div");
-										div.style.display = "none";
-										div.id="allComments";
-										div.innerHTML = msg;
-										window.GrEngine.show("allComments", "Комментарии к офису");
+										$("#commonPanel").html("<br>" + msg);
+										window.GrEngine.show("commonPanel", "Комментарии к офису");
 									}).fail(function() {
-										$("#closer-button").click();
 										$("#message")
 										.html("Невозможно показать коммeнтарии");
 										window.showMessage();

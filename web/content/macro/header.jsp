@@ -23,6 +23,7 @@
 			<br>
 			<!-- добавить линк по которомы выкидивать окно с инфой о юзере -->
 			<div id="person" class="office-comments-link" onclick="window.getPersonalData();">Персональные данные</div>
+			<br>
 			<a href="/database/logout" >Выйти</a>
 		</div>
 	</c:if>

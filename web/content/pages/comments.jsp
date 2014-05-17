@@ -12,12 +12,12 @@
 	<c:forEach var="comm" items="${comms}">
 		<tr>
 			<th>${comm.getTextComment()}</th>
-			<td>${comm.getClient()getPeople()getFirstName()} 
-				${comm.getClient()getPeople()getLastName()}</td>
+			<td>${comm.getClient().getPeople().getFirstName()} 
+				${comm.getClient().getPeople().getLastName()}</td>
 		</tr>
 	</c:forEach>
 </table>
 </c:if>
-<c:if test="${empty comms or comms.size() > 0}">
+<c:if test="${empty comms or comms.size() == 0}">
 	Нет комментариев для этого офиса
 </c:if>

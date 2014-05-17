@@ -24,8 +24,8 @@
 					<td>${office.getContact().getEmail()}</td>
 					<c:if test="${not empty onlineUser}">
 						<td>
-							<span id="${office.getId()}" data-add-comment class="office-comments-link">Добавить </span>|
-							<span id="${office.getId()}" data-show-comment class="office-comments-link"> Просмотреть</span>
+							<span id="${office.getId()}" data-add-comment="on" class="office-comments-link">Добавить </span>|
+							<span id="${office.getId()}" data-show-comment="on" class="office-comments-link"> Просмотреть</span>
 						</td>
 					</c:if>
 				</tr>

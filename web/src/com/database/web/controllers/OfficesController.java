@@ -1,5 +1,7 @@
 package com.database.web.controllers;
 
+import java.util.logging.Logger;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ import com.database.web.services.OfficesService;
 @Controller
 public class OfficesController {
 
+	private static Logger log = Logger.getLogger(OfficesController.class.getName());
+	
 	@Autowired
 	private PageContextBean pageContextBean;
 	
@@ -31,10 +35,10 @@ public class OfficesController {
 		Modeller.addDefaultModels(model, pageContextBean, request);
 		try {
 			model.addObject("offices", officesService.getAllOffices());
+			log.info("handle request offices");
 		} catch(Exception e) {
 			Modeller.setErrorMessage(model);
 		}
-		model.addObject("onlineUser", request.getAttribute("USER"));
 		
 		return model;
 	}
