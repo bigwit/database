@@ -69,7 +69,12 @@ public class CommentsController {
 				header,  text, id, String.valueOf(clientId));
 		log.info("ADD COMMENT: TEXT = " + text + ", id_office = " + id + " HEADER = " + header);
 
-		commentService.addComment(header + ":\n" + text, null, clientId, null, officeId);
+		Long newOffice = commentService.addComment(header + ":\n" + text, null, clientId, null, officeId);
+		log.info("ID NEW OFFICE = " + newOffice);
+		
+		if(newOffice == -1L) {
+			response.setStatus(500);
+		}
 	}
 	
 	@RequestMapping(value = "/getcomments")
