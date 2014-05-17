@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.database.data.domain.User;
-import com.database.data.jpa.PeopleService;
+import com.database.data.jpa.UserService;
 import com.database.web.autorization.GridData;
 import com.database.web.autorization.secure.SecureCookie;
 import com.database.web.beans.PageContextBean;
@@ -36,7 +36,7 @@ public class CreateUserController {
 	private SiteContent siteContent;
 	
 	@Autowired
-	private PeopleService peopleService;
+	private UserService userService;
 	
 	@RequestMapping(value = "/createuser", method = RequestMethod.POST)
 	public String createUser(@ModelAttribute("viewuser") ViewUser user, ModelMap model,
@@ -52,6 +52,8 @@ public class CreateUserController {
 		//... other
 		
 		// add user to database here
+		// create user here: getUserBySource(...);
+		getUserBySource(user);
 		
 		try {
 			String secureCookie = GridData.getInstance().addUser(newUser);
@@ -67,6 +69,10 @@ public class CreateUserController {
 		
 		model.addAllAttributes(view.getModelMap());
 		return "index";
+	}
+	
+	private User getUserBySource(ViewUser source) {
+		return null;
 	}
 
 }

@@ -3,6 +3,10 @@
 	$(document)
 			.ready(
 					function() {
+						
+						window.notEmptyLine = function(line) {
+							return (line != null && line != '');
+						};
 
 						window.initWindowEngine();
 
@@ -81,7 +85,6 @@
 							}).done(function(msg) {
 								$("#commonPanel").html("<br>" + msg);
 								window.GrEngine.show("commonPanel", "Мои данные");
-								window.showMessage();
 							}).fail(function() {
 								$("#message")
 								.html("Сервер не доступен");
@@ -157,30 +160,12 @@
 								login : _login,
 								passwd : _passwd
 							}, "post");
-
-							// var form = document.createElement("form");
-							// form.setAttribute("method", "post");
-							// form.setAttribute("action", "/database/login");
-							// var hiddenField1 =
-							// document.createElement("input");
-							// hiddenField1.setAttribute("type", "hidden");
-							// hiddenField1.setAttribute("name", "login");
-							// hiddenField1.setAttribute("value", login);
-							// var hiddenField =
-							// document.createElement("input");
-							// hiddenField.setAttribute("type", "hidden");
-							// hiddenField.setAttribute("name", "passwd");
-							// hiddenField.setAttribute("value", passwd);
-							// form.appendChild(hiddenField);
-							// form.appendChild(hiddenField1);
-							// document.body.appendChild(form);
-							// form.submit();
 						});
 
 						$("#join")
 								.click(
 										function(e) {
-
+											// check password
 											var passwd = document
 													.getElementById("pswd").value;
 											var cpasswd = document
@@ -199,20 +184,49 @@
 												window.showMessage();
 												return false;
 											}
-
-											var nik = document
-													.getElementById("nikname").value;
-											if (nik == null || nik == '') {
-												$("#message")
-														.html(
-																"Поле логин не может быть пустым");
+											// names
+											var fname = document.getElementById("fname").value;
+											var lname = document.getElementById("lname").value;
+											if(!notEmptyLine(fname) 
+													|| !notEmptyLine(lname)) {
+												$("#message").html("Не задано имя или фамилия");
 												window.showMessage();
 												return false;
 											}
-
+											//login
+											var login = document.getElementById("nikname").value;
+											if(!notEmptyLine(login)) {
+												$("#message").html("Не задан логин");
+												window.showMessage();
+												return false;
+											}
+											// contacts
+											var email = document.getElementById("email").value;
+											var phone = document.getElementById("telephone").value;
+											if(!notEmptyLine(email) 
+													|| !notEmptyLine(phone)) {
+												$("#message").html("Не заданы контакты: телефон или email");
+												window.showMessage();
+												return false;
+											}
+											// местоположение
+											var city = document.getElementById("city").value;
+											var country = document.getElementById("country").value;
+											if(!notEmptyLine(city) || !notEmptyLine(country)) {
+												$("#message").html("Не задано местоположение: страна и город");
+												window.showMessage();
+												return false;
+											}
+											// дата
+											var date = document.getElementById("date").value;
+											if(! /^\d\d-\d\d-\d\d\d\d$/.test(date)) {
+												$("#message").html("Дата задана в неверном формате");
+												window.showMessage();
+												return false;
+											}
+											
 											return true;
 										});
-
 					});
 
 })(jQuery);

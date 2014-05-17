@@ -32,7 +32,8 @@
 				<td colspan="2"><form:input id="city" path="city" placeholder="City" style="width: 385px;" /></td>
 			</tr>
 			<tr>
-				<td><form:input id="date" path="date" placeholder="Date birth 12-12-2012" style="width: 185px;" /></td>
+				<td><form:input id="date" path="date" placeholder="dd-mm-yyyy" style="width: 185px;" 
+					onfocus="this.select();lcs(this)" onclick="event.cancelBubble=true; this.select(); lcs(this)" /></td>
 				<td>
 					<b style="margin-left: 10px;" >F</b><form:radiobutton path="sex" value="F" checked="true" />
 					<b style="margin-left: 10px;" >M</b><form:radiobutton path="sex" value="M" />
