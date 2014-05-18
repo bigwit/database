@@ -61,7 +61,7 @@ public class CommentServiceImpl implements CommentService {
 	public List<Comment> findCommentsByOffice(Long officeId) {
 		return entityManager
 				.createNativeQuery(
-						"select * from table(load_comments) where id_office = :idOffice")
+						"select * from table(load_comments) where id_office = :idOffice", Comment.class)
 				.setParameter("idOffice", officeId).getResultList();
 	}
 
