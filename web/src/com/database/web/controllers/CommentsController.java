@@ -85,8 +85,12 @@ public class CommentsController {
 		Long officeId = 1L;
 		try {
 			officeId = Long.parseLong(request.getParameter("officeId"));
-		} catch(Exception ex) {	}
+		} catch(Exception ex) {
+			response.setStatus(500);
+			return model;
+		}
 		List<Comment> comments = commentService.findCommentsByOffice(officeId);
+		
 		model.addObject("comms", comments);
 		return model;
 	}

@@ -56,7 +56,7 @@ public class CreateUserController {
 		try {
 			newUser = getUserBySource(user);
 		} catch (ParseException e1) {
-			log.warning("Cot valid date format");
+			log.warning("Not valid date format");
 			e1.printStackTrace();
 			Modeller.addMessage(view, "Не удалось создать учетную запись. Попробуйте еще раз.");
 			pageContextBean.setContent(siteContent.getCreatePage());
@@ -65,7 +65,15 @@ public class CreateUserController {
 
 		try {
 			// add user to DB
-			userService.registerUser(newUser);
+			Long newUserId = userService.registerUser(newUser);
+			if(newUserId == -1) {
+				throw new Exception("error insert user");
+			}
+			log.info("ID for new user = " + newUserId);
+			newUser = userService.findById(newUserId);
+			log.info("New user have data: id_people = " 
+						+ newUser.getPeople().getId() 
+						+ ", name = " + newUser.getPeople().getFirstName());
 			// register user in GridDataInMemory
 			String secureCookie = GridData.getInstance().addUser(newUser);
 			// сохраняем в модели и выставляем куку
