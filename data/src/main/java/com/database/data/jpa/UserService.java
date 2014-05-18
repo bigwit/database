@@ -16,4 +16,6 @@ public interface UserService {
 	Long addUser(String login, String hashPasswd, String role, People people);
 
 	User getUser(String login, String hashPasswd);
+	
+	Long registerUser(User user);
 }

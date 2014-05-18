@@ -12,6 +12,7 @@ public enum Role {
 	
 	private String inLine;
 	
+	@Override
 	public String toString() {
 		return inLine;
 	}
