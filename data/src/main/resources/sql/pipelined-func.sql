@@ -28,7 +28,7 @@ IS BEGIN
 			I.ID,
 			I.TEXT_COMMENT,
 			I.ID_HOTEL,
-			I.ID_CLIENT,
+			I.ID_PEOPLE,
 			I.ID_PLACE,
 			I.ID_OFFICE
 		));

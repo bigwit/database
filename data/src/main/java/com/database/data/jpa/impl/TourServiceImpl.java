@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.database.data.domain.Tour;
+import com.database.data.domain.TourInfo;
 import com.database.data.jpa.TourService;
 
 @Repository
@@ -41,6 +42,14 @@ public class TourServiceImpl implements TourService {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<TourInfo> findAllInfo() {
+		return entityManager.createNativeQuery(
+				"select * from table(find_tour_info())", TourInfo.class)
+				.getResultList();
 	}
 
 }
