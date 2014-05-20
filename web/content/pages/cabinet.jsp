@@ -2,9 +2,9 @@
     pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div style="text-align: center; margin: 10px;">
+<div style="text-align: left; margin: 10px;">
 	<c:if test="${not empty onlineUser}">
-		<table>
+		<table style="width: 100%;">
 			<tr>
 				<td>Логин</td>
 				<td>${onlineUser.getLogin()}</td>
@@ -35,9 +35,9 @@
 			</tr>
 			<tr>
 				<td>Адрес</td>
-				<td>${onlineUser.getPeople().getContact().getLocation().getCountry()} 
-				    ${onlineUser.getPeople().getContact().getLocation().getCity()} 
-				    ${onlineUser.getPeople().getContact().getLocation().getDescription()}</td>
+				<td>${onlineUser.getPeople().getContact().getLocation().getCountry()}. 
+				    ${onlineUser.getPeople().getContact().getLocation().getCity()}. 
+				    ${onlineUser.getPeople().getContact().getLocation().getDescription()}.</td>
 			</tr>
 		</table>
 	</c:if>

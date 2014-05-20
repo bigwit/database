@@ -382,6 +382,13 @@
 	margin-left: 25%;
 }
 
+.comments-table {
+	word-wrap: break-word;
+}
+
+.comments-table td {
+	width: 50%;
+}
 
 
 

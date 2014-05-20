@@ -65,8 +65,9 @@ public class CommentsController {
 				+ "\noffice id = %s, \npeople id = %s", 
 				header,  text, id, String.valueOf(people.getId()));
 		log.info("ADD COMMENT: TEXT = " + text + ", id_office = " + id + " HEADER = " + header);
+		String resText = toCorrectText(header + "\n" + text);
 
-		Long newOffice = commentService.addComment(header + ":\n" + text, null, people.getId(), null, officeId);
+		Long newOffice = commentService.addComment(resText, null, people.getId(), null, officeId);
 		log.info("ID NEW COMMENT = " + newOffice);
 		
 		if(newOffice == -1L) {
@@ -90,6 +91,18 @@ public class CommentsController {
 		
 		model.addObject("comms", comments);
 		return model;
+	}
+	
+	private String toCorrectText(String str) {
+		StringBuilder b = new StringBuilder();
+		for(int i = 0; i < str.length(); ++i) {
+			b.append(str.charAt(i));
+			if(i % 50 == 0) {
+				b.append('\n');
+				continue;
+			}
+		}
+		return b.toString();
 	}
 	
 }

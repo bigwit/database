@@ -4,7 +4,7 @@
 <div style="margin-left: 10px; text-align: center;">
 	<br>
 	<c:if test="${not empty comms and comms.size() > 0}">
-		<table class="offices-table">
+		<table class="offices-table comments-table">
 			<tr>
 				<th>Комментарий</th>
 				<th>Оставил</th>
@@ -13,9 +13,9 @@
 				<tr>
 					<td>${_comm.getTextComment()}</td>
 					<td>
-						${_comm.getClient().getPeople().getFirstName()}
-						${_comm.getClient().getPeople().getLastName()}. Город: 
-						${_comm.getClient().getPeople().getContact().getLocation().getCity()}
+						${_comm.getClient().getFirstName()}
+						${_comm.getClient().getLastName()}. Город: 
+						${_comm.getClient().getContact().getLocation().getCity()}
 					</td>
 				</tr>
 			</c:forEach>
