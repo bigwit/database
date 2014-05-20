@@ -18,8 +18,8 @@ public class Comment {
 	private Hotel hotel;
 	
 	@ManyToOne
-	@JoinColumn(name = "id_client")
-	private Client client;
+	@JoinColumn(name = "id_people")
+	private People people;
 	
 	@ManyToOne
 	@JoinColumn(name = "id_place")
@@ -56,12 +56,12 @@ public class Comment {
 		this.hotel = hotel;
 	}
 
-	public Client getClient() {
-		return client;
+	public People getClient() {
+		return people;
 	}
 
-	public void setClient(Client client) {
-		this.client = client;
+	public void setClient(People client) {
+		this.people = client;
 	}
 
 	public Place getPlace() {
