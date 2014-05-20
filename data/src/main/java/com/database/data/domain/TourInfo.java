@@ -8,16 +8,16 @@ public class TourInfo {
 	@Id
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "travel_info")
 	private String travelInfo;
-	
+
 	@Column(name = "flight_info")
 	private String flightInfo;
-	
+
 	@Column(name = "hotel_info")
 	private String hotelInfo;
-	
+
 	private TourInfo() {
 	}
 
@@ -52,5 +52,12 @@ public class TourInfo {
 	public void setHotelInfo(String hotelInfo) {
 		this.hotelInfo = hotelInfo;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "[tour info name: " + name + ", travelInfo: " + travelInfo
+				+ ", flightInfo: " + flightInfo + ", hotelInfo: " + hotelInfo
+				+ "]";
+	}
+
 }
