@@ -63,6 +63,14 @@
 		this.idContent = null;
 
 	};
+	
+	WindowEngine.prototype.wait = function() {
+		$("#waiter").show("fast");
+	};
+	
+	WindowEngine.prototype.notify = function() {
+		$("#waiter").hide("fast");
+	};
 
 	window.initWindowEngine = function() {
 		if(window.GrEngine == null)

@@ -363,6 +363,25 @@
 	text-decoration: underline;
 }
 
+.waiting {
+	display: none;
+	background-color: #909090;
+	position: fixed;
+	opacity: 0.6;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 100;
+}
+
+.loader {
+	width: 50%;
+	height: 8%;
+	margin-top: 50%;
+	margin-left: 25%;
+}
+
 
 
 

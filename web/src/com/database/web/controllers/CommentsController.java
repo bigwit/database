@@ -60,17 +60,14 @@ public class CommentsController {
 		
 		People people = user.getPeople();
 		log.info(people.toString());
-		Long peopleId = people.getId();
-		log.info("people id: " + peopleId);
-		long clientId = clientService.findByPeopleId(peopleId).getId();
 
 		String.format("Add comment: \nheader = %s, \ntext = %s, "
-				+ "\noffice id = %s, \nclient id = %s", 
-				header,  text, id, String.valueOf(clientId));
+				+ "\noffice id = %s, \npeople id = %s", 
+				header,  text, id, String.valueOf(people.getId()));
 		log.info("ADD COMMENT: TEXT = " + text + ", id_office = " + id + " HEADER = " + header);
 
-		Long newOffice = commentService.addComment(header + ":\n" + text, null, clientId, null, officeId);
-		log.info("ID NEW OFFICE = " + newOffice);
+		Long newOffice = commentService.addComment(header + ":\n" + text, null, people.getId(), null, officeId);
+		log.info("ID NEW COMMENT = " + newOffice);
 		
 		if(newOffice == -1L) {
 			response.setStatus(500);

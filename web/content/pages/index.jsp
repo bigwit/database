@@ -60,6 +60,9 @@
 	
 	<!-- My cabinet person -->
 	<div id="commonPanel" style="display: none; margin: 10px;" ></div>
+	
+	<!-- Loading bar -->
+	<div id="waiter" class="waiting"><img src="resources/loader.gif" class="loader" /></div>
 </body>
 </html>
 

@@ -82,6 +82,14 @@ public class People {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
+	
+	public String getPresentationSex() {
+		if(getSex() == "M") {
+			return "Муж.";
+		} else {
+			return "Жен.";
+		}
+	}
 
 	public Contact getContact() {
 		return contact;

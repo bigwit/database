@@ -29,7 +29,9 @@
 							if (!eventArgs && !eventArgs.type) {
 								return;
 							}
+							
 							if (eventArgs.type == 'comment') {
+								window.GrEngine.wait();
 								var headInput = $('div#viewport1')[1].childNodes[7];
 								var textInput = $('div#viewport1')[1].childNodes[16];
 								$.ajax({
@@ -41,11 +43,13 @@
 										office: window.currCommWinId
 									}
 								}).done(function(msg) {
+									window.GrEngine.notify();
 									$("#closer-button").click();
 									$("#message")
 									.html("Комментарий успешно добавлен");
 									window.showMessage();
 								}).fail(function() {
+									window.GrEngine.notify();
 									$("#closer-button").click();
 									$("#message")
 									.html("Не удалось добавить комментарий =(");
