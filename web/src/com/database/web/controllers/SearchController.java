@@ -1,5 +1,7 @@
 package com.database.web.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.database.data.domain.TourInfo;
+import com.database.data.jpa.SearchService;
 import com.database.web.beans.PageContextBean;
 import com.database.web.beans.SiteContent;
 import com.database.web.controllers.utils.Modeller;
 import com.database.web.forms.ViewSearchForm;
-import com.database.web.services.SearchService;
-import com.database.web.services.search.ResultSearch;
 
 @Controller
 public class SearchController {
@@ -25,10 +27,11 @@ public class SearchController {
 	@Autowired
 	private PageContextBean pageContextBean;
 	
-	private SearchService searchService = new SearchService();
-	
 	@Autowired
 	private SiteContent siteContent;
+	
+	//@Autowired
+	//private SearchService searchService;
 	
 	@RequestMapping(value = "/sch", method = RequestMethod.POST)
 	public ModelAndView search(@ModelAttribute("query") ViewSearchForm query, 
@@ -39,12 +42,12 @@ public class SearchController {
 		model.addAllAttributes(view.getModelMap());
 		
 		if(query != null && query.getQuery() != null && !query.getQuery().isEmpty()) {
-			ResultSearch results = searchService.search(query);
-			if(results == null || results.isErrorMessage()) {
+			List<TourInfo> results = null;
+			if(results == null || results.size() == 0) {
 				Modeller.addMessage(view, String.format(NOT_FOUND_MESSAGE, query.getQuery()));
 			} else {
 				view.addObject("valueQuery", query.getQuery());
-				view.addObject("resultset", results.set());
+				view.addObject("resultset", results);
 			}
 		}
 		return view;

@@ -165,6 +165,38 @@
 								passwd : _passwd
 							}, "post");
 						});
+						
+						$("#selectionType").click(function(e) {
+							e.preventDefault();
+							// show selection here
+							var but = $(this).offset();
+							var x = but.left;
+							var y = but.top + 30;
+							$("#menuSelection").css({left:x, top: y});
+							var visibl = "block";
+							if(window.isMenuContext) {
+								window.isMenuContext = null;
+								visibl = "none";
+							} else {
+								window.isMenuContext = 1;
+							}
+							$("#menuSelection").css("display", visibl);
+						});
+						
+						$("[data-type-search]").each(function(i, elem) {
+							$(elem).click(function(e) {
+								window.searchType = e;
+								$("[data-type-search]").each(function(i, elem) {
+									$(elem).removeClass("selection-active-element");
+								});
+								var key = $(this)[0].dataset.typeSearch;
+								$("#typeOfSeach").val(key);
+								$(this).addClass("selection-active-element");
+								window.isMenuContext = null;
+								$("#menuSelection").css("display", "none");
+								
+							});
+						});
 
 						$("#join")
 								.click(

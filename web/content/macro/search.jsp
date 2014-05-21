@@ -6,26 +6,23 @@
 <br>
 <form:form id="searchForm" method="POST" action="/database/sch" commandName="query">
 	<form:input path="query" placeholder="${placeholderSearch}" class="query-line" value="${valueQuery}" />
-	<input type="submit" value="Поиск" class="button orange" />
+	<form:hidden id="typeOfSeach" path="type" value="simple"/>
+	<input type="submit" value="Поиск" class="button orange search-button" />
+	<input id="selectionType" type="button" value="v" class="button orange selection-button" />
 </form:form>
 <br>
 <c:if test="${not empty resultset}">
-	<br>Здесь предложение поискать по оригинальному запросу<br>
-	<c:forEach var="resultItem" items="${resultset}">
-		Категория: ${resultItem.getCategory().getDisplayName()}<br>
-		<table >
-			<tr>
-			<c:forEach var="str" items="${resultItem.getContent()}">
-				<td style="margin: 10px;">
-					${str}
-				</td>
-			</c:forEach>
-			</tr>
-		</table>
-	</c:forEach>
+	<br><a href="#">Показать результаты по ${valueQuery}</a><br>
+		
 	<br>
-	Показать еще
+	<a href="#">Показать еще</a>
 </c:if>
 
 <br>
 <br>
+<div id="menuSelection" class="select-menu">
+	<div data-type-search = "simple" class="selection-element selection-active-element" >Простой поиск</div><br>
+	<div data-type-search = "algo1" class="selection-element" >Алгоритм #1</div><br>
+	<div data-type-search = "algo2" class="selection-element" >Алгоритм #2</div><br>
+	<div data-type-search = "algo3" class="selection-element" >Алгоритм #3</div><br>
+</div>

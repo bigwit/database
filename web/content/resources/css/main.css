@@ -101,9 +101,7 @@
 	font: 14px/100% Arial, Helvetica, sans-serif;
 	padding: .5em 2em .55em;
 	text-shadow: 0 1px 1px rgba(0, 0, 0, .3);
-	-webkit-border-radius: .5em;
-	-moz-border-radius: .5em;
-	border-radius: .5em;
+	border-radius: 5px;
 	-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
 	-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
 	box-shadow: 0 1px 2px rgba(0, 0, 0, .2);
@@ -389,6 +387,48 @@
 .comments-table td {
 	width: 50%;
 }
+
+.selection-button {
+	border-bottom-right-radius: 5px !important;
+	border-bottom-left-radius: 0px !important;
+	border-top-right-radius: 5px !important;
+	border-top-left-radius: 0px !important;
+	margin-left: -2px;
+	padding-left: 8px !important;
+	padding-right: 8px !important;
+}
+
+.search-button {
+	border-bottom-left-radius: 5px !important;
+	border-top-left-radius: 5px !important;
+	border-bottom-right-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+	margin-right: -2px;
+}
+
+.select-menu {
+	display: none; 
+	background: #EFEFCF;
+	position: absolute; 
+	z-index: 5;
+}
+
+.selection-element {
+	padding: 5px;
+	cursor: pointer;
+	margin-bottom: -15px;
+	margin-top: 5px;
+}
+
+.selection-element:hover{
+	background-color: #DFCBAD;
+}
+
+.selection-active-element {
+	background-color: #FCAB7F;
+}
+
+
 
 
 
