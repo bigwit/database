@@ -9,8 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Repository;
 
-import com.database.data.domain.Tour;
+import com.database.data.domain.TourInfo;
 import com.database.data.jpa.SearchService;
+import com.database.data.type.SearchType;
 
 @Repository
 @Service("searchService")
@@ -23,11 +24,12 @@ public class SearchServiceImpl implements SearchService {
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	@Override
-	public List<Tour> searchTours(String searchLine) {
+	public List<TourInfo> search(String searchLine, SearchType searchType) {
 		return entityManager
-				.createNativeQuery("select * from table(search_tour(:line))",
-						Tour.class).setParameter("line", searchLine)
-				.getResultList();
+				.createNativeQuery(
+						"select * from table(search(:searchLine, :searchType))",
+						TourInfo.class).setParameter("searchLine", searchLine)
+				.setParameter("searchType", searchType.name()).getResultList();
 	}
 
 }

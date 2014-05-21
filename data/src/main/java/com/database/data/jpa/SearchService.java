@@ -2,10 +2,11 @@ package com.database.data.jpa;
 
 import java.util.List;
 
-import com.database.data.domain.Tour;
+import com.database.data.domain.TourInfo;
+import com.database.data.type.SearchType;
 
 public interface SearchService {
 
-	List<Tour> searchTours(String searchLine);
+	List<TourInfo> search(String searchLine, SearchType searchType);
 	
 }
