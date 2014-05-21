@@ -8,7 +8,7 @@ public class TourInfo {
 	@Id
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "name_place")
 	private String namePlace;
 
@@ -21,7 +21,7 @@ public class TourInfo {
 	@Column(name = "hotel_info")
 	private String hotelInfo;
 
-	private TourInfo() {
+	public TourInfo() {
 	}
 
 	public String getName() {
@@ -58,9 +58,9 @@ public class TourInfo {
 
 	@Override
 	public String toString() {
-		return "[tour info name: " + name + ", travelInfo: " + travelInfo
-				+ ", flightInfo: " + flightInfo + ", hotelInfo: " + hotelInfo
-				+ "]";
+		return "[tour info name: " + name + ", namePlace: " + namePlace
+				+ ", travelInfo: " + travelInfo + ", flightInfo: " + flightInfo
+				+ ", hotelInfo: " + hotelInfo + "]";
 	}
 
 	public String getNamePlace() {

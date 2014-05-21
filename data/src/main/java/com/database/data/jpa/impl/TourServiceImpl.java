@@ -1,10 +1,12 @@
 package com.database.data.jpa.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Repository;
@@ -47,9 +49,22 @@ public class TourServiceImpl implements TourService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<TourInfo> findAllInfo() {
-		return entityManager.createNativeQuery(
-				"select * from table(find_tour_info())", TourInfo.class)
-				.getResultList();
+		Query query = entityManager.createNativeQuery(
+				"select * from table(find_tour_info())");
+		query.executeUpdate();
+		List<Object[]> loaded = query.getResultList();
+		List<TourInfo> result = new ArrayList<>();
+		for (Object[] o : loaded) {
+			TourInfo info = new TourInfo();
+			info.setName((String) o[0]);
+			info.setNamePlace((String) o[1]);
+			info.setTravelInfo((String) o[2]);
+			info.setFlightInfo((String) o[3]);
+			info.setHotelInfo((String) o[4]);
+			result.add(info);
+		}
+		
+		return result;
 	}
 
 }
