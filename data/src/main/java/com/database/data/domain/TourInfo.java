@@ -8,6 +8,9 @@ public class TourInfo {
 	@Id
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "name_place")
+	private String namePlace;
 
 	@Column(name = "travel_info")
 	private String travelInfo;
@@ -58,6 +61,14 @@ public class TourInfo {
 		return "[tour info name: " + name + ", travelInfo: " + travelInfo
 				+ ", flightInfo: " + flightInfo + ", hotelInfo: " + hotelInfo
 				+ "]";
+	}
+
+	public String getNamePlace() {
+		return namePlace;
+	}
+
+	public void setNamePlace(String namePlace) {
+		this.namePlace = namePlace;
 	}
 
 }
