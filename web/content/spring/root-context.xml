@@ -23,6 +23,7 @@
 	<context:component-scan base-package="com.database.web.beans" />
 	<context:component-scan base-package="com.database.web.forms" />
 	<context:component-scan base-package="com.database.web.controllers" />
+	<!-- <context:component-scan base-package="com.database.data.jpa.impl" /> -->
 	
 	<bean id="officesService" class="com.database.web.services.OfficesService" />
 	<bean id="officeService" class="com.database.data.jpa.impl.OfficeServiceImpl" />
@@ -30,6 +31,7 @@
 	<bean id="userService" class="com.database.data.jpa.impl.UserServiceImpl" />
 	<bean id="clientService" class="com.database.data.jpa.impl.ClientServiceImpl" />
 	<bean id="peopleService" class="com.database.data.jpa.impl.PeopleServiceImpl" />
+	<bean id="searchService" class="com.database.data.jpa.impl.SearchServiceImpl" />
 	
 	
 	<bean id="cookieFilter" class="com.database.web.autorization.secure.CookieFilter" lazy-init="true" />

@@ -428,6 +428,14 @@
 	background-color: #FCAB7F;
 }
 
+.main-result-block {
+	width: 70%;
+	font-family: "Courier New";
+}
+
+.tour-info-description {
+	margin-left: 10px;
+}
 
 
 

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.database.data.domain.TourInfo;
 import com.database.data.jpa.SearchService;
+import com.database.data.type.SearchType;
 import com.database.web.beans.PageContextBean;
 import com.database.web.beans.SiteContent;
 import com.database.web.controllers.utils.Modeller;
@@ -30,8 +31,8 @@ public class SearchController {
 	@Autowired
 	private SiteContent siteContent;
 	
-	//@Autowired
-	//private SearchService searchService;
+	@Autowired
+	private SearchService searchService;
 	
 	@RequestMapping(value = "/sch", method = RequestMethod.POST)
 	public ModelAndView search(@ModelAttribute("query") ViewSearchForm query, 
@@ -42,7 +43,7 @@ public class SearchController {
 		model.addAllAttributes(view.getModelMap());
 		
 		if(query != null && query.getQuery() != null && !query.getQuery().isEmpty()) {
-			List<TourInfo> results = null;
+			List<TourInfo> results = searchService.search(query.getQuery(), getSearchTypeByQuery(query));
 			if(results == null || results.size() == 0) {
 				Modeller.addMessage(view, String.format(NOT_FOUND_MESSAGE, query.getQuery()));
 			} else {
@@ -51,6 +52,16 @@ public class SearchController {
 			}
 		}
 		return view;
+	}
+	
+	private SearchType getSearchTypeByQuery(ViewSearchForm form) {
+		switch(form.getType()) {
+			case "simple" : return SearchType.SIMPLE;
+			case "algo1" : return SearchType.LEVENSTEIN;
+			case "algo2" : return SearchType.VINKLER;
+			case "algo3" : return SearchType.SIMPLE;
+				default: return SearchType.SIMPLE;
+		}
 	}
 	
 }
