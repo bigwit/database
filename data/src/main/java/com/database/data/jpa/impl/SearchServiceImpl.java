@@ -1,9 +1,11 @@
 package com.database.data.jpa.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
@@ -25,11 +27,22 @@ public class SearchServiceImpl implements SearchService {
 	@Transactional(readOnly = true)
 	@Override
 	public List<TourInfo> search(String searchLine, SearchType searchType) {
-		return entityManager
+		Query query = entityManager
 				.createNativeQuery(
-						"select * from table(search(:searchLine, :searchType))",
-						TourInfo.class).setParameter("searchLine", searchLine)
-				.setParameter("searchType", searchType.name()).getResultList();
+						"select * from table(search(:searchLine, :searchType))").setParameter("searchLine", searchLine)
+				.setParameter("searchType", searchType.name());
+		List<Object[]> loaded = query.getResultList();
+		List<TourInfo> result = new ArrayList<>();
+		for (Object[] o : loaded) {
+			TourInfo info = new TourInfo();
+			info.setName((String) o[0]);
+			info.setNamePlace((String) o[1]);
+			info.setTravelInfo((String) o[2]);
+			info.setFlightInfo((String) o[3]);
+			info.setHotelInfo((String) o[4]);
+			result.add(info);
+		}
+		return result;
 	}
 
 }
