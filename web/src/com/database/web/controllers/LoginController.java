@@ -56,8 +56,11 @@ public class LoginController {
 		if (user.getRole().equals(Role.EMPLOYEE.toString())) {
 			model = new ModelAndView(Modeller.ROOT_VIEW_EMPLOYEE);
 		}
-		pageContextBean.setContent(siteContent.getDefaultPage());
+		pageContextBean.setContent(siteContent.getDefaultPage(Role.valueOf(user.getRole())));
 		Modeller.addDefaultModels(model, pageContextBean, request);
+		if (user.getRole().equals(Role.EMPLOYEE.toString())) {
+			model.addObject("empMacros", "/macro/empstart.jsp");
+		}
 		// авторизовать юзера в гриде
 		String secureCookie = GridData.getInstance().addUser(user);
 		// сохранить в модели и выставить куку

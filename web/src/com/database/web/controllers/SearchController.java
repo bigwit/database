@@ -3,6 +3,7 @@ package com.database.web.controllers;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,10 @@ public class SearchController {
 
 	@Autowired
 	private SearchService searchService;
+	
+	private List<TourInfo> allResults;
+	
+	private int currentPage = 1;
 
 	@RequestMapping(value = "/sch", method = RequestMethod.POST)
 	public ModelAndView search(@ModelAttribute("query") ViewSearchForm query,
@@ -44,14 +49,16 @@ public class SearchController {
 		try {
 			if (query != null && query.getQuery() != null
 					&& !query.getQuery().isEmpty()) {
-				List<TourInfo> results = searchService.search(query.getQuery(),
+				allResults = searchService.search(query.getQuery(),
 						getSearchTypeByQuery(query));
-				if (results == null || results.size() == 0) {
+				if (allResults == null || allResults.size() == 0) {
 					Modeller.addMessage(view,
 							String.format(NOT_FOUND_MESSAGE, query.getQuery()));
 				} else {
+					resetPaging();
 					view.addObject("valueQuery", query.getQuery());
-					view.addObject("resultset", results);
+					view.addObject("resultset", getPageTours(currentPage));
+					view.addObject("pages", getCountPages());
 				}
 			}
 		} catch (Exception ex) {
@@ -59,6 +66,40 @@ public class SearchController {
 			Modeller.addMessage(view, "Не удалось связаться с базой данных");
 		}
 		return view;
+	}
+	
+	@RequestMapping(value = "/more", method = RequestMethod.POST)
+	public ModelAndView moreResults(HttpServletRequest request,
+			HttpServletResponse response) {
+		ModelAndView view = new ModelAndView("mresult");
+		if(currentPage < getCountPages()) {
+			view.addObject("resultset", getPageTours(++currentPage));
+		} else {
+			response.setStatus(500);
+		}
+		return view;
+	}
+	
+	private void resetPaging() {
+		this.currentPage = 1;
+	}
+
+	private List<TourInfo> getPageTours(int numberPage) {
+		int count = getCountPages();
+		if(numberPage > count || numberPage < 1) {
+			return getPageTours(1);
+		}
+		int toIndex = numberPage * 10 - 1;
+		if(toIndex > allResults.size()) {
+			toIndex = allResults.size() - 1;
+		}
+		return allResults.subList((numberPage - 1) * 10, toIndex);
+	}
+	
+	private int getCountPages() {
+		int countPages = allResults.size() / 10;
+		countPages += allResults.size() % 10 != 0 ? 1 : 0;
+		return countPages;
 	}
 
 	private SearchType getSearchTypeByQuery(ViewSearchForm form) {

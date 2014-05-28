@@ -197,6 +197,26 @@
 								
 							});
 						});
+						
+						$("#more").click(function(e) {
+							$.ajax({
+								type : "POST",
+								url : "/database/more"
+							}).done(function(msg) {
+								if(msg == null || msg == '') {
+									$("#message")
+									.html("Что то пошло не так...");
+									window.showMessage();
+									return;
+								} 
+								$("#resss").append("<br />" + msg);
+							}).fail(function() {
+								$("#message")
+								.html("Больше нет результатов");
+								window.showMessage();
+							});
+							
+						});
 
 						$("#join")
 								.click(

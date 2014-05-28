@@ -431,6 +431,7 @@
 .main-result-block {
 	width: 70%;
 	font-family: "Courier New";
+	text-align: left;
 }
 
 .tour-info-description {

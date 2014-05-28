@@ -14,6 +14,7 @@
 <c:if test="${not empty resultset and resultset.size() > 0}">
 	<%-- <br><a href="#">Показать результаты по запросу ${valueQuery}</a> --%>
 	<br>
+		<span id="resss">
 		<c:forEach var="tourInfo" items="${resultset}">
 			<div class="main-result-block">
 				<span style="font-size: x-large; margin-left: 10px;">&lt;&lt; ${tourInfo.getName()} &gt;&gt;</span><br>
@@ -28,8 +29,9 @@
 			</div>
 			<hr size="2" color="#f47a20" width="75%" align="center">
 		</c:forEach>
+		</span>
 	<br>
-	<a href="#">Показать еще</a>
+	<a id="more" href="#">Показать еще</a>
 </c:if>
 
 <br>

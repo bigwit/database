@@ -1,5 +1,7 @@
 package com.database.web.beans;
 
+import com.database.web.autorization.secure.Role;
+
 public class SiteContent {
 
 	private String defaultPage;
@@ -18,6 +20,13 @@ public class SiteContent {
 
 	public String getDefaultPage() {
 		return defaultPage;
+	}
+	
+	public String getDefaultPage(Role role) {
+		if(role == Role.EMPLOYEE) {
+			return "/macro/empcontent.jsp";
+		}
+		return getDefaultPage();
 	}
 
 	public void setDefaultPage(String defaultPage) {
