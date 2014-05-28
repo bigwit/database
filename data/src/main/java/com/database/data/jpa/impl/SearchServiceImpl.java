@@ -29,7 +29,8 @@ public class SearchServiceImpl implements SearchService {
 	public List<TourInfo> search(String searchLine, SearchType searchType) {
 		Query query = entityManager
 				.createNativeQuery(
-						"select * from table(search(:searchLine, :searchType))").setParameter("searchLine", searchLine)
+						"select * from table(search(:searchLine, :searchType))")
+						.setParameter("searchLine", searchLine)
 				.setParameter("searchType", searchType.name());
 		List<Object[]> loaded = query.getResultList();
 		List<TourInfo> result = new ArrayList<>();
