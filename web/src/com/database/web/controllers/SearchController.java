@@ -109,7 +109,7 @@ public class SearchController {
 		case "algo1":
 			return SearchType.LEVENSTEIN;
 		case "algo2":
-			return SearchType.VINKLER;
+			return SearchType.JARO_WINKLER;
 		case "algo3":
 			return SearchType.SIMPLE;
 		default:

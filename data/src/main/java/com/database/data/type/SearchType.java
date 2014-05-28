@@ -15,6 +15,6 @@ public enum SearchType {
 	/**
 	 * Алгоритм Джаро-Винклера
 	 */
-	VINKLER
+	JARO_WINKLER
 
 }
