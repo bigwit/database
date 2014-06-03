@@ -1,9 +1,13 @@
 package com.database.data.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
-public class TourInfo {
+public class TourInfo implements Serializable{
+
+	private static final long serialVersionUID = -6263961237029663071L;
 
 	@Id
 	@Column(name = "name")

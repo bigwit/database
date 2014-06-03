@@ -1,12 +1,9 @@
 <?xml  version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jee="http://www.springframework.org/schema/jee" 
-	xmlns:lang="http://www.springframework.org/schema/lang"
-	xmlns:p="http://www.springframework.org/schema/p" 
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
@@ -15,28 +12,70 @@
         http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-	
-	<!-- Включаем опцию использования конфигурационных аннотаций (@Annotation-based configuration)-->
+
+	<!-- Включаем опцию использования конфигурационных аннотаций (@Annotation-based 
+		configuration) -->
 	<context:annotation-config />
 
-	<!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
+	<!-- Определяем папки, в которых будем автоматически искать бины-компоненты 
+		(@Component, @Service) -->
 	<context:component-scan base-package="com.database.web.beans" />
 	<context:component-scan base-package="com.database.web.forms" />
 	<context:component-scan base-package="com.database.web.controllers" />
 	<!-- <context:component-scan base-package="com.database.data.jpa.impl" /> -->
+
+	<bean id="instance" class="com.hazelcast.core.Hazelcast"
+		factory-method="newHazelcastInstance">
+		<constructor-arg>
+			<bean class="com.hazelcast.config.Config" />
+		</constructor-arg>
+	</bean>
+
+
+
+	<!-- beans for bd-in-memory implementations -->
+	<bean id="mapOffices" factory-bean="instance" factory-method="getMap">
+		<constructor-arg value="map" />
+	</bean>
 	
+	<bean id="mapSearch" factory-bean="instance" factory-method="getMap">
+		<constructor-arg value="map" />
+	</bean>
+	
+	<bean id="mapComments" factory-bean="instance" factory-method="getMap">
+		<constructor-arg value="map" />
+	</bean>
+
+
+
+	<!-- services for data access layer -->
 	<bean id="officesService" class="com.database.web.services.OfficesService" />
-	<bean id="officeService" class="com.database.data.jpa.impl.OfficeServiceImpl" />
+	
+	<bean id="officeService" class="com.database.data.jpa.impl.OfficeServiceImpl" >
+		<property name="storage" ref="mapOffices"/>
+	</bean>
+	
 	<bean id="travelService" class="com.database.data.jpa.impl.TravelServiceImpl" />
+	
 	<bean id="userService" class="com.database.data.jpa.impl.UserServiceImpl" />
+	
 	<bean id="clientService" class="com.database.data.jpa.impl.ClientServiceImpl" />
+	
 	<bean id="peopleService" class="com.database.data.jpa.impl.PeopleServiceImpl" />
-	<bean id="searchService" class="com.database.data.jpa.impl.SearchServiceImpl" />
 	
+	<bean id="searchService" class="com.database.data.jpa.impl.SearchServiceImpl" >
+		<property name="storage" ref="mapSearch" />
+	</bean>
 	
-	<bean id="cookieFilter" class="com.database.web.autorization.secure.CookieFilter" lazy-init="true" />
-	
-	<import resource="properties.xml"/>
-	<import resource="db-context.xml"/>
+	<bean id="commentService" class="com.database.data.jpa.impl.CommentServiceImpl" >
+		<property name="storage" ref="mapComments" />
+	</bean>
+
+
+	<bean id="cookieFilter" class="com.database.web.autorization.secure.CookieFilter"
+		lazy-init="true" />
+
+	<import resource="properties.xml" />
+	<import resource="db-context.xml" />
 
 </beans>

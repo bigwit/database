@@ -1,10 +1,14 @@
 package com.database.data.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "comments")
-public class Comment {
+public class Comment implements Serializable{
+
+	private static final long serialVersionUID = -6359964197521788957L;
 
 	@Id
 	@Column(name = "id")

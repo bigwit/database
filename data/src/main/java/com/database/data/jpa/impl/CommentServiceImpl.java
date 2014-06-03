@@ -1,6 +1,9 @@
 package com.database.data.jpa.impl;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -13,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.database.data.domain.Comment;
 import com.database.data.jpa.CommentService;
 import com.database.data.jpa.procedure.ProcedureExecutor;
+import com.hazelcast.core.IMap;
 
 @Repository
 @Service("commentService")
@@ -21,6 +25,26 @@ public class CommentServiceImpl implements CommentService {
 
 	@PersistenceContext
 	private EntityManager entityManager;
+	
+	private static Logger log = Logger.getLogger(CommentServiceImpl.class.getName());
+	
+	protected IMap<String, Object> storage;
+	
+	public void setStorage(IMap<String, Object> stor) {
+		this.storage = stor;
+	}
+	
+	private Object selectCommentByOffice(Long id) {
+		Object res = null;
+		log.info("START SELECT. Time = " + new Date().getTime());
+		res = storage.get(id.toString());
+		if(res == null || ((List<Comment>)res).size() < 1) {
+			res = findByOffice(id);
+			storage.putIfAbsent(id.toString(), res, 10L, TimeUnit.MINUTES);
+		}
+		log.info("FINISH SELECT. Time = " + new Date().getTime());
+		return res;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -58,7 +82,12 @@ public class CommentServiceImpl implements CommentService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Comment> findCommentsByOffice(Long officeId) {
+	public java.util.List<Comment> findCommentsByOffice(Long officeId) {
+		return (List<Comment>) selectCommentByOffice(officeId);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<Comment> findByOffice(Long officeId) {
 		return entityManager
 				.createNativeQuery(
 						"select * from table(load_comments) where id_office = :idOffice", Comment.class)

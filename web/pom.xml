@@ -12,6 +12,12 @@
 	</properties>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>com.hazelcast</groupId>
+			<artifactId>hazelcast</artifactId>
+			<version>3.3-EA</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.database</groupId>
